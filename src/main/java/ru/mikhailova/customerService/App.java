@@ -1,4 +1,4 @@
-package ru.mikhailova;
+package ru.mikhailova.customerService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
