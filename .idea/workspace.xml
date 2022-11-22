@@ -5,36 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/SupportController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimCreateRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimCreateResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimExecutorDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimUpdateRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/ClaimMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/config/KafkaProducerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/config/KafkaTopicConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/StateMapper.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/ClaimShiftDelegate.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/SendToCustomerClaimAcceptedMessageDelegate.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/StateTransitionDelegate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimUpdate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/repository/ClaimRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/repository/ExecutorRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V001__create_table_claim_executor.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V002__create_table_claim.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V003__insert_into_claim_executor.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaimMessageListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/dto/NewClaimDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/stateTransition/StateTransitionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/stateTransition/StateTransitionServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bpmn/support.bpmn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/service/SupportServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/controller/dto/SupportController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/domain/Claim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/domain/ClaimExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/domain/ClaimState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/domain/ClaimType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/domain/Support.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/mapper/SupportMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/repository/SupportRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/service/SupportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/service/SupportServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,9 +35,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -63,46 +54,114 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Жанна/IdeaProjects/support&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "C:/Users/Жанна/IdeaProjects/support"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Жанна\IdeaProjects\support\src\main\resources\bpmn" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ru.mikhailova.customerService.service" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.App" />
+  <component name="RunManager" selected="JUnit.SupportServiceImplTest">
+    <configuration name="SupportServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.mikhailova.customerService.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.service" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.service.SupportServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ExampleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SupportServiceImplTest.addClaim" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ru.*" />
+          <option name="PATTERN" value="ru.mikhailova.customerService.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ru" />
-      <option name="MAIN_CLASS_NAME" value="ru.ExampleTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.service" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.service.SupportServiceImplTest" />
+      <option name="METHOD_NAME" value="addClaim" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SupportServiceImplTest.deleteClaimById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="support" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.mikhailova.customerService.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.service" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.service.SupportServiceImplTest" />
+      <option name="METHOD_NAME" value="deleteClaimById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SupportServiceImplTest.getClaimById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="support" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.mikhailova.customerService.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.service" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.service.SupportServiceImplTest" />
+      <option name="METHOD_NAME" value="getClaimById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SupportServiceImplTest.updateClaimById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="support" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.mikhailova.customerService.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.service" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.service.SupportServiceImplTest" />
+      <option name="METHOD_NAME" value="updateClaimById" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.ExampleTest" />
+        <item itemvalue="JUnit.SupportServiceImplTest" />
+        <item itemvalue="JUnit.SupportServiceImplTest.updateClaimById" />
+        <item itemvalue="JUnit.SupportServiceImplTest.addClaim" />
+        <item itemvalue="JUnit.SupportServiceImplTest.deleteClaimById" />
+        <item itemvalue="JUnit.SupportServiceImplTest.getClaimById" />
       </list>
     </recent_temporary>
   </component>
@@ -129,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668883207940</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add crud operations, claim executors migration">
+      <created>1669029456178</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669029456178</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,7 +224,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="add domain" />
-    <option name="LAST_COMMIT_MESSAGE" value="add domain" />
+    <MESSAGE value="add crud operations, claim executors migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="add crud operations, claim executors migration" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
