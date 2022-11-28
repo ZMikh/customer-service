@@ -6,5 +6,4 @@ import ru.mikhailova.customerService.domain.ClaimExecutor;
 
 @Repository
 public interface ExecutorRepository extends JpaRepository<ClaimExecutor, Long> {
-
 }

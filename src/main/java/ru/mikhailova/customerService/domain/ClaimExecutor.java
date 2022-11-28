@@ -12,8 +12,6 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
-@NamedEntityGraph(name = "Executor.claims",
-        attributeNodes = @NamedAttributeNode(value = "claims"))
 public class ClaimExecutor {
     /**
      * Идентификатор исполнителя
@@ -29,6 +27,6 @@ public class ClaimExecutor {
     /**
      * Список заявок исполнителя
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "executor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "executor")
     private List<Claim> claims;
 }

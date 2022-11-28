@@ -9,8 +9,8 @@
       <bpmn:incoming>Flow_0if7x9a</bpmn:incoming>
       <bpmn:outgoing>Flow_0yieoma</bpmn:outgoing>
     </bpmn:intermediateThrowEvent>
-    <bpmn:sequenceFlow id="Flow_0fpq6lt" sourceRef="newState" targetRef="Activity_09nq5k9" />
-    <bpmn:sequenceFlow id="Flow_0if7x9a" sourceRef="Activity_09nq5k9" targetRef="acceptedState" />
+    <bpmn:sequenceFlow id="Flow_0fpq6lt" sourceRef="newState" targetRef="claimRegistration" />
+    <bpmn:sequenceFlow id="Flow_0if7x9a" sourceRef="claimRegistration" targetRef="acceptedState" />
     <bpmn:sequenceFlow id="Flow_0yieoma" sourceRef="acceptedState" targetRef="Activity_1bctrmy" />
     <bpmn:sendTask id="Activity_1bctrmy" name="Отправить заявителю уведомление о получении заявки" camunda:delegateExpression="${sendToCustomerClaimAcceptedMessage}">
       <bpmn:incoming>Flow_0yieoma</bpmn:incoming>
@@ -91,7 +91,7 @@
       <bpmn:outgoing>Flow_0mmhe72</bpmn:outgoing>
     </bpmn:intermediateThrowEvent>
     <bpmn:sequenceFlow id="Flow_0mmhe72" sourceRef="notResolvedState" targetRef="Gateway_1yyb66l" />
-    <bpmn:userTask id="Activity_09nq5k9" name="Принять заявку">
+    <bpmn:userTask id="claimRegistration" name="Принять заявку">
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_0fpq6lt</bpmn:incoming>
       <bpmn:outgoing>Flow_0if7x9a</bpmn:outgoing>
@@ -107,7 +107,7 @@
         <camunda:executionListener delegateExpression="${stateTransitionDelegate}" event="start" />
       </bpmn:extensionElements>
       <bpmn:outgoing>Flow_0fpq6lt</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1msvx61" messageRef="Message_2c51g9c" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0lreadd" messageRef="Message_2c51g9c" />
     </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_2mko57q" name="claim_resolved_result_message" />
@@ -168,14 +168,14 @@
           <dc:Bounds x="1511" y="93" width="58" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0njyl2j_di" bpmnElement="Activity_09nq5k9">
+      <bpmndi:BPMNShape id="Activity_0njyl2j_di" bpmnElement="claimRegistration">
         <dc:Bounds x="270" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0iky4eo_di" bpmnElement="Activity_18kjta1">
         <dc:Bounds x="1140" y="240" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0e80fhv_di" bpmnElement="newState">
+      <bpmndi:BPMNShape id="Event_0ttefk7_di" bpmnElement="newState">
         <dc:Bounds x="179" y="159" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="168" y="202" width="58" height="40" />

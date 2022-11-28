@@ -11,10 +11,10 @@ import java.util.Optional;
 @Repository
 public interface ClaimRepository extends JpaRepository<Claim, Long> {
     @Override
-    @EntityGraph(value = "Executor.withClaims")
-    Optional<Claim> findById(Long aLong);
+    @EntityGraph(value = "Claim.executor")
+    List<Claim> findAll();
 
     @Override
-    @EntityGraph(value = "Executor.withClaims")
-    List<Claim> findAll();
+    @EntityGraph(value = "Claim.executor")
+    Optional<Claim> findById(Long aLong);
 }

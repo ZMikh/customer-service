@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Entity
 @Setter
 @Getter
+@NamedEntityGraph(name = "Claim.executor",
+        attributeNodes = @NamedAttributeNode(value = "executor"))
 public class Claim {
     /**
      * Идентификатор заявки
@@ -49,7 +51,7 @@ public class Claim {
     /**
      * Исполнитель заявки
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "executor_id")
     private ClaimExecutor executor;
 }

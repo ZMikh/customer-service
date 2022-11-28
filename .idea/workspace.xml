@@ -4,33 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/config/KafkaProducerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/config/KafkaTopicConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/StateMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/ClaimShiftDelegate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/SendToCustomerClaimAcceptedMessageDelegate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/StateTransitionDelegate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaim.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaimMessageListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/dto/NewClaimDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/stateTransition/StateTransitionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/stateTransition/StateTransitionServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/bpmn/support.bpmn" afterDir="false" />
+    <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="add kafka configuration">
       <change afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/AbstractIntegrationTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/IntegrationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/SupportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/SupportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimCreateRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimCreateRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimCreateResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/ClaimMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/ClaimMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaimMessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaimMessageListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/dto/NewClaimDto.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/repository/ClaimRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/repository/ClaimRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/repository/ExecutorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/repository/ExecutorRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bpmn/support.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bpmn/support.bpmn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/service/SupportServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/service/SupportServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,8 +152,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.IntegrationTest.couldGetAllClaims" />
         <item itemvalue="JUnit.SupportServiceImplTest" />
+        <item itemvalue="JUnit.IntegrationTest.couldGetAllClaims" />
         <item itemvalue="JUnit.SupportServiceImplTest.updateClaimById" />
         <item itemvalue="JUnit.SupportServiceImplTest.addClaim" />
       </list>
@@ -205,7 +196,42 @@
       <option name="project" value="LOCAL" />
       <updated>1669134001932</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add kafka configuration">
+      <created>1669225379722</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1669225379722</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add delegates; service, mapper for StateTransitionDelegate">
+      <created>1669312447501</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1669312447501</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add state transition service">
+      <created>1669388920900</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669388920900</updated>
+    </task>
+    <task id="LOCAL-00008" summary="javadoc">
+      <created>1669487860286</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669487860286</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add new claim listener">
+      <created>1669574755763</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669574755763</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,7 +262,12 @@
     <MESSAGE value="add domain" />
     <MESSAGE value="add crud operations, claim executors migration" />
     <MESSAGE value="unit test on service add" />
-    <option name="LAST_COMMIT_MESSAGE" value="unit test on service add" />
+    <MESSAGE value="add kafka configuration" />
+    <MESSAGE value="add delegates; service, mapper for StateTransitionDelegate" />
+    <MESSAGE value="add state transition service" />
+    <MESSAGE value="javadoc" />
+    <MESSAGE value="add new claim listener" />
+    <option name="LAST_COMMIT_MESSAGE" value="add new claim listener" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
