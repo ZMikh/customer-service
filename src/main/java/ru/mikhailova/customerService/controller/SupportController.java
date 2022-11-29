@@ -2,13 +2,11 @@ package ru.mikhailova.customerService.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.mikhailova.customerService.controller.dto.ClaimCreateRequestDto;
-import ru.mikhailova.customerService.controller.dto.ClaimDto;
-import ru.mikhailova.customerService.controller.dto.ClaimRegisterResponseDto;
-import ru.mikhailova.customerService.controller.dto.ClaimUpdateRequestDto;
+import ru.mikhailova.customerService.controller.dto.*;
 import ru.mikhailova.customerService.controller.mapper.ClaimMapper;
 import ru.mikhailova.customerService.domain.Claim;
-import ru.mikhailova.customerService.domain.ClaimUpdate;
+import ru.mikhailova.customerService.service.ClaimRegister;
+import ru.mikhailova.customerService.service.ClaimUpdate;
 import ru.mikhailova.customerService.service.SupportService;
 
 import java.util.List;
@@ -21,15 +19,27 @@ public class SupportController {
     private final ClaimMapper mapper;
 
     @PostMapping("/start")
-    public String start(@RequestBody ClaimCreateRequestDto claimCreateRequestDto) {
-        Claim claim = mapper.toClaim(claimCreateRequestDto);
+    public String start(@RequestBody ClaimStartRequestDto claimStartRequestDto) {
+        Claim claim = mapper.toClaim(claimStartRequestDto);
         service.startSupport(claim);
-        return "claim with id: " +  claim.getId() + " is sent to registration";
+        return "Claim with id: " +  claim.getId() + " is sent to registration";
     }
 
     @PostMapping("/register/{id}")
-    public ClaimRegisterResponseDto register(@PathVariable Long id) {
-        return mapper.toClaimRegisterResponseDto(service.registerClaim(id));
+    public ClaimRegisterResponseDto register(@PathVariable Long id,
+                                             @RequestBody ClaimRegisterRequestDto claimRegisterRequestDto) {
+        ClaimRegister claimRegister = mapper.toClaimRegister(claimRegisterRequestDto);
+        return mapper.toClaimRegisterResponseDto(service.registerClaim(id, claimRegister));
+    }
+
+    @PostMapping("/execute/basic/{id}")
+    public void executeBasic(@PathVariable Long id) {
+        service.executeBasicClaim(id);
+    }
+
+    @PostMapping("/execute/assigned/{id}")
+    public void executeAssigned(@PathVariable Long id) {
+        service.executeAssignedClaim(id);
     }
 
     @GetMapping("/get-all")

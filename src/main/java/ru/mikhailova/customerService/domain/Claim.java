@@ -45,6 +45,11 @@ public class Claim {
      */
     private String description;
     /**
+     * Заявка переназначенна на специалиста по работе со специфичными запросами
+     */
+    @Transient
+    private Boolean isAssigned;
+    /**
      * Время завершения заявки
      */
     private LocalDateTime claimFinishedTime;

@@ -12,15 +12,15 @@
     <bpmn:sequenceFlow id="Flow_0fpq6lt" sourceRef="newState" targetRef="claimRegistration" />
     <bpmn:sequenceFlow id="Flow_0if7x9a" sourceRef="claimRegistration" targetRef="acceptedState" />
     <bpmn:sequenceFlow id="Flow_0yieoma" sourceRef="acceptedState" targetRef="Activity_1bctrmy" />
-    <bpmn:sendTask id="Activity_1bctrmy" name="Отправить заявителю уведомление о получении заявки" camunda:delegateExpression="${sendToCustomerClaimAcceptedMessage}">
+    <bpmn:sendTask id="Activity_1bctrmy" name="Отправить заявителю уведомление о получении заявки" camunda:delegateExpression="${sendToCustomerClaimAcceptedMessageDelegate}">
       <bpmn:incoming>Flow_0yieoma</bpmn:incoming>
       <bpmn:outgoing>Flow_0ttuz1i</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:exclusiveGateway id="Gateway_1yyb66l" default="Flow_18c8if6">
       <bpmn:incoming>Flow_0ttuz1i</bpmn:incoming>
       <bpmn:incoming>Flow_0mmhe72</bpmn:incoming>
-      <bpmn:outgoing>Flow_0ixrvdt</bpmn:outgoing>
       <bpmn:outgoing>Flow_18c8if6</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0ixrvdt</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0ttuz1i" sourceRef="Activity_1bctrmy" targetRef="Gateway_1yyb66l" />
     <bpmn:serviceTask id="Activity_13qem4r" name="Перевести заявку" camunda:delegateExpression="${claimShiftDelegate}">
@@ -28,21 +28,18 @@
       <bpmn:incoming>Flow_0ixrvdt</bpmn:incoming>
       <bpmn:outgoing>Flow_04lh411</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_0dkuakb" name="Выполнить базовую заявку">
+    <bpmn:userTask id="basicClaimExecution" name="Выполнить базовую заявку">
       <bpmn:incoming>Flow_18c8if6</bpmn:incoming>
       <bpmn:outgoing>Flow_0h54wu5</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0ixrvdt" sourceRef="Gateway_1yyb66l" targetRef="Activity_13qem4r">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isAssigned==true}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_18c8if6" sourceRef="Gateway_1yyb66l" targetRef="Activity_0dkuakb" />
+    <bpmn:sequenceFlow id="Flow_18c8if6" sourceRef="Gateway_1yyb66l" targetRef="basicClaimExecution" />
     <bpmn:exclusiveGateway id="Gateway_0k2wv6l">
       <bpmn:incoming>Flow_0h54wu5</bpmn:incoming>
       <bpmn:incoming>Flow_0rgf1zi</bpmn:incoming>
       <bpmn:outgoing>Flow_1mlb9zu</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_04lh411" sourceRef="Activity_13qem4r" targetRef="assignedState" />
-    <bpmn:sequenceFlow id="Flow_0h54wu5" sourceRef="Activity_0dkuakb" targetRef="Gateway_0k2wv6l" />
+    <bpmn:sequenceFlow id="Flow_0h54wu5" sourceRef="basicClaimExecution" targetRef="Gateway_0k2wv6l" />
     <bpmn:intermediateThrowEvent id="assignedState" name="Заявка назначена">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${stateTransitionDelegate}" event="start" />
@@ -83,7 +80,7 @@
     <bpmn:sequenceFlow id="Flow_01mek3s" sourceRef="Gateway_1t72k83" targetRef="notResolvedState">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isNotResolved==true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:intermediateThrowEvent id="notResolvedState" name="Вопрос по заявке ыне решен">
+    <bpmn:intermediateThrowEvent id="notResolvedState" name="Вопрос по заявке не решен">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${stateTransitionDelegate}" event="start" />
       </bpmn:extensionElements>
@@ -96,12 +93,12 @@
       <bpmn:incoming>Flow_0fpq6lt</bpmn:incoming>
       <bpmn:outgoing>Flow_0if7x9a</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_18kjta1" name="Выполнить заявку специалистом">
+    <bpmn:userTask id="specificClaimExecution" name="Выполнить заявку специалистом">
       <bpmn:incoming>Flow_0gu47m8</bpmn:incoming>
       <bpmn:outgoing>Flow_0rgf1zi</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0gu47m8" sourceRef="assignedState" targetRef="Activity_18kjta1" />
-    <bpmn:sequenceFlow id="Flow_0rgf1zi" sourceRef="Activity_18kjta1" targetRef="Gateway_0k2wv6l" />
+    <bpmn:sequenceFlow id="Flow_0gu47m8" sourceRef="assignedState" targetRef="specificClaimExecution" />
+    <bpmn:sequenceFlow id="Flow_0rgf1zi" sourceRef="specificClaimExecution" targetRef="Gateway_0k2wv6l" />
     <bpmn:startEvent id="newState" name="Общение в службу поддержки">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${stateTransitionDelegate}" event="start" />
@@ -109,9 +106,12 @@
       <bpmn:outgoing>Flow_0fpq6lt</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0lreadd" messageRef="Message_2c51g9c" />
     </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0ixrvdt" sourceRef="Gateway_1yyb66l" targetRef="Activity_13qem4r">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isAssigned==true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
   </bpmn:process>
-  <bpmn:message id="Message_2mko57q" name="claim_resolved_result_message" />
-  <bpmn:message id="Message_2c51g9c" name="new_claim" />
+  <bpmn:message id="Message_2mko57q" name="claim_resolution_message" />
+  <bpmn:message id="Message_2c51g9c" name="new_claim_message" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="support">
       <bpmndi:BPMNShape id="Event_0uos68z_di" bpmnElement="acceptedState">
@@ -130,7 +130,7 @@
         <dc:Bounds x="860" y="240" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1uh7fug_di" bpmnElement="Activity_0dkuakb">
+      <bpmndi:BPMNShape id="Activity_1uh7fug_di" bpmnElement="basicClaimExecution">
         <dc:Bounds x="930" y="137" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
@@ -165,13 +165,13 @@
       <bpmndi:BPMNShape id="Event_0x5vjyt_di" bpmnElement="notResolvedState">
         <dc:Bounds x="1592" y="82" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1511" y="93" width="58" height="40" />
+          <dc:Bounds x="1497" y="93" width="86" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0njyl2j_di" bpmnElement="claimRegistration">
         <dc:Bounds x="270" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0iky4eo_di" bpmnElement="Activity_18kjta1">
+      <bpmndi:BPMNShape id="Activity_0iky4eo_di" bpmnElement="specificClaimExecution">
         <dc:Bounds x="1140" y="240" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>

@@ -1,4 +1,4 @@
-package ru.mikhailova.customerService.domain;
+package ru.mikhailova.customerService.service;
 
 import lombok.Data;
 

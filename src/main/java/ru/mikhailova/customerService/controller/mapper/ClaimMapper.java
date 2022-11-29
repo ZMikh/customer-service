@@ -3,12 +3,10 @@ package ru.mikhailova.customerService.controller.mapper;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
-import ru.mikhailova.customerService.controller.dto.ClaimCreateRequestDto;
-import ru.mikhailova.customerService.controller.dto.ClaimDto;
-import ru.mikhailova.customerService.controller.dto.ClaimRegisterResponseDto;
-import ru.mikhailova.customerService.controller.dto.ClaimUpdateRequestDto;
+import ru.mikhailova.customerService.controller.dto.*;
 import ru.mikhailova.customerService.domain.Claim;
-import ru.mikhailova.customerService.domain.ClaimUpdate;
+import ru.mikhailova.customerService.service.ClaimRegister;
+import ru.mikhailova.customerService.service.ClaimUpdate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ public class ClaimMapper {
     public ClaimMapper() {
         this.mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        mapper.typeMap(ClaimCreateRequestDto.class, Claim.class)
+        mapper.typeMap(ClaimStartRequestDto.class, Claim.class)
                 .addMapping(dto -> NEW, Claim::setClaimState);
         mapper.typeMap(Claim.class, ClaimRegisterResponseDto.class)
                 .addMapping(registrationTime -> LocalDateTime.now(), ClaimRegisterResponseDto::setClaimRegistrationTime);
@@ -46,11 +44,14 @@ public class ClaimMapper {
         return dtos;
     }
 
-    public Claim toClaim(ClaimCreateRequestDto dto) {
+    public Claim toClaim(ClaimStartRequestDto dto) {
         return mapper.map(dto, Claim.class);
     }
 
     public ClaimRegisterResponseDto toClaimRegisterResponseDto(Claim claim) {
         return mapper.map(claim, ClaimRegisterResponseDto.class);
+    }
+    public ClaimRegister toClaimRegister(ClaimRegisterRequestDto dto) {
+        return mapper.map(dto, ClaimRegister.class);
     }
 }

@@ -1,7 +1,6 @@
 package ru.mikhailova.customerService.service;
 
 import ru.mikhailova.customerService.domain.Claim;
-import ru.mikhailova.customerService.domain.ClaimUpdate;
 
 import java.util.List;
 
@@ -40,17 +39,33 @@ public interface SupportService {
      */
 
     Claim updateClaimById(Long id, ClaimUpdate claimUpdate);
+
     /**
      * Стартовать работу службы поддержки
      *
-     * @param claim      заявка
+     * @param claim заявка
      */
     void startSupport(Claim claim);
+
     /**
      * Зарегистрировать заявку
      *
      * @param id идентификатор заявки присвоенный на момент старта работы службы поддержки
      * @return заявка
      */
-    Claim registerClaim(Long id);
+    Claim registerClaim(Long id, ClaimRegister claimRegister);
+
+    /**
+     * Выполнить заявку общего типа
+     *
+     * @param id идентификатор заявки
+     */
+    void executeBasicClaim(Long id);
+
+    /**
+     * Выполнить заявку переназначенную на специалиста по работе со специфичными запросами
+     *
+     * @param id идентификатор заявки
+     */
+    void executeAssignedClaim(Long id);
 }

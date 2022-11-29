@@ -13,4 +13,5 @@ public class ClaimRegisterResponseDto {
     private String claimState;
     private String description;
     private ClaimExecutorDto executor;
+    private Boolean isAssigned;
 }

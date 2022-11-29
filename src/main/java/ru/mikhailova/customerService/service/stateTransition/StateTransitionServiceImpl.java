@@ -12,8 +12,8 @@ import ru.mikhailova.customerService.repository.ClaimRepository;
 public class StateTransitionServiceImpl implements StateTransitionService {
     private final ClaimRepository repository;
 
-    @Override
     @Transactional
+    @Override
     public void claimStateTransit(ClaimState claimState, Long id) {
         Claim claim = repository.findById(id).orElseThrow();
         claim.setClaimState(claimState);
