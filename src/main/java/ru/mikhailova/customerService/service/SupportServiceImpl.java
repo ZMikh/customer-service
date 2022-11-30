@@ -29,6 +29,7 @@ public class SupportServiceImpl implements SupportService {
     @Transactional
     @Override
     public void startSupport(Claim claim) {
+        claim.setClaimRegistrationTime(LocalDateTime.now());
         Claim savedClaim = claimRepository.save(claim);
 
         Map<String, Object> variables = new HashMap<>();
@@ -87,7 +88,6 @@ public class SupportServiceImpl implements SupportService {
         }
         taskService.complete(task.getId());
     }
-
 
     @Transactional(readOnly = true)
     @Override

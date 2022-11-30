@@ -11,15 +11,15 @@ import ru.mikhailova.customerService.repository.ClaimRepository;
 
 @Service
 @Slf4j
-public class SendToCustomerClaimAcceptedMessageDelegateServiceImpl implements SendToCustomerClaimAcceptedMessageDelegateService {
+public class SendToCustomerClaimAcceptedMessageServiceImpl implements SendToCustomerClaimAcceptedMessageService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final ClaimRepository repository;
     private final String topic;
     private final ClaimMapper mapper;
 
-    public SendToCustomerClaimAcceptedMessageDelegateServiceImpl(KafkaTemplate<String, Object> kafkaTemplate,
-                                                                 ClaimRepository repository,
-                                                                 @Value("${kafka.topic.claim-acceptance}") String topic, ClaimMapper mapper) {
+    public SendToCustomerClaimAcceptedMessageServiceImpl(KafkaTemplate<String, Object> kafkaTemplate,
+                                                         ClaimRepository repository,
+                                                         @Value("${kafka.topic.claim-acceptance}") String topic, ClaimMapper mapper) {
         this.kafkaTemplate = kafkaTemplate;
         this.repository = repository;
         this.topic = topic;

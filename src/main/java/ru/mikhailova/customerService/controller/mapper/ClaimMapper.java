@@ -5,10 +5,10 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 import ru.mikhailova.customerService.controller.dto.*;
 import ru.mikhailova.customerService.domain.Claim;
+import ru.mikhailova.customerService.listener.dto.ClaimResolutionDto;
 import ru.mikhailova.customerService.service.ClaimRegister;
 import ru.mikhailova.customerService.service.ClaimUpdate;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +23,6 @@ public class ClaimMapper {
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         mapper.typeMap(ClaimStartRequestDto.class, Claim.class)
                 .addMapping(dto -> NEW, Claim::setClaimState);
-        mapper.typeMap(Claim.class, ClaimRegisterResponseDto.class)
-                .addMapping(registrationTime -> LocalDateTime.now(), ClaimRegisterResponseDto::setClaimRegistrationTime);
     }
 
     public ClaimDto toClaimDto(Claim claim) {
@@ -53,5 +51,9 @@ public class ClaimMapper {
     }
     public ClaimRegister toClaimRegister(ClaimRegisterRequestDto dto) {
         return mapper.map(dto, ClaimRegister.class);
+    }
+
+    public ClaimResolutionDto toClaimResolutionDto(Claim claim) {
+        return mapper.map(claim, ClaimResolutionDto.class);
     }
 }

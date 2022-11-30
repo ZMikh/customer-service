@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClaimShiftDelegate implements JavaDelegate {
     @Override
-    public void execute(DelegateExecution execution) throws Exception {
+    public void execute(DelegateExecution execution) {
 
     }
 }

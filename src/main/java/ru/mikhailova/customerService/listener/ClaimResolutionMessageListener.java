@@ -20,7 +20,6 @@ public class ClaimResolutionMessageListener {
 
         runtimeService.createMessageCorrelation("claim_resolution_message")
                 .processInstanceVariableEquals("id", resultDto.getId())
-                .processInstanceVariableEquals("result", resultDto.getResult())
                 .correlateWithResult();
     }
 }

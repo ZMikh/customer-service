@@ -50,6 +50,11 @@ public class Claim {
     @Transient
     private Boolean isAssigned;
     /**
+     * Решение по заявке принято клиентом
+     */
+    @Transient
+    private Boolean result;
+    /**
      * Время завершения заявки
      */
     private LocalDateTime claimFinishedTime;
