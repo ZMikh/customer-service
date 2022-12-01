@@ -53,7 +53,7 @@ public class Claim {
      * Решение по заявке принято клиентом
      */
     @Transient
-    private Boolean result;
+    private Boolean queryIsSolved;
     /**
      * Время завершения заявки
      */

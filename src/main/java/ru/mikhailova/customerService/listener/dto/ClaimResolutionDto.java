@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class ClaimResolutionDto {
     private Long id;
-    private Boolean result;
+    private Boolean queryIsSolved;
 }

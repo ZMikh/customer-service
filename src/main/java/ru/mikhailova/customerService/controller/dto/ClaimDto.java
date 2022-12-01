@@ -14,4 +14,5 @@ public class ClaimDto {
     private String description;
     private LocalDateTime claimFinishedTime;
     private ClaimExecutorDto executor;
+    private Boolean queryIsSolved;
 }
