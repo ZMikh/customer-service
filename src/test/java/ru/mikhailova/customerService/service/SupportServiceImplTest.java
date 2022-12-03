@@ -1,5 +1,7 @@
 package ru.mikhailova.customerService.service;
 
+import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.TaskService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.domain.ClaimExecutor;
-import ru.mikhailova.customerService.domain.ClaimUpdate;
 import ru.mikhailova.customerService.repository.ClaimRepository;
 import ru.mikhailova.customerService.repository.ExecutorRepository;
 
@@ -28,6 +29,12 @@ class SupportServiceImplTest {
     @Mock
     private ExecutorRepository executorRepository;
 
+    @Mock
+    private RuntimeService runtimeService;
+
+    @Mock
+    private TaskService taskService;
+
     @Captor
     private ArgumentCaptor<Claim> captor;
     private SupportServiceImpl service;
@@ -43,7 +50,7 @@ class SupportServiceImplTest {
         claim = new Claim();
         claim.setDescription("payment error");
         claim.setExecutor(claimExecutor);
-        service = new SupportServiceImpl(claimRepository, executorRepository);
+        service = new SupportServiceImpl(claimRepository, executorRepository, runtimeService, taskService);
     }
 
     @Test
@@ -64,16 +71,6 @@ class SupportServiceImplTest {
 
         verify(claimRepository, times(1)).findById(TEST_ID);
         assertThat(testClaim.getDescription()).isEqualTo("payment error");
-    }
-
-    @Test
-    void couldAddClaim() {
-        when(executorRepository.findById(any())).thenReturn(ofNullable(claimExecutor));
-
-        service.addClaim(claim, TEST_ID);
-
-        verify(claimRepository, times(1)).save(captor.capture());
-        assertThat(captor.getValue().getExecutor().getName()).isEqualTo(claimExecutor.getName());
     }
 
     @Test

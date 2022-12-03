@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="add kafka configuration">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimResolution/ClaimResolutionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimResolution/ClaimResolutionServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/AbstractIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/IntegrationTest.java" afterDir="false" />
+    <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="start testing part">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/ClaimMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/ClaimMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/ClaimShiftDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/ClaimShiftDelegate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/SendToCustomerClaimAcceptedMessageDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/SendToCustomerClaimAcceptedMessageDelegate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/ClaimResolutionMessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/ClaimResolutionMessageListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/sendToCustomerClaimRegistrationInformation/SendToCustomerClaimAcceptedMessageDelegateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/sendToCustomerClaimRegistrationInformation/SendToCustomerClaimAcceptedMessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/sendToCustomerClaimRegistrationInformation/SendToCustomerClaimAcceptedMessageDelegateServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/sendToCustomerClaimRegistrationInformation/SendToCustomerClaimAcceptedMessageServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/service/SupportServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/service/SupportServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -244,7 +232,28 @@
       <option name="project" value="LOCAL" />
       <updated>1669741846495</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="code refactoring, add claim resolution service">
+      <created>1669829292201</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669829292201</updated>
+    </task>
+    <task id="LOCAL-00013" summary="code refactoring, listener update">
+      <created>1669917569542</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1669917569542</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add integration test">
+      <created>1670001787352</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1670001787352</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -282,7 +291,10 @@
     <MESSAGE value="add new claim listener" />
     <MESSAGE value="add support start and claim registration process" />
     <MESSAGE value="code refactoring, add message listeners, add user tasks" />
-    <option name="LAST_COMMIT_MESSAGE" value="code refactoring, add message listeners, add user tasks" />
+    <MESSAGE value="code refactoring, add claim resolution service" />
+    <MESSAGE value="code refactoring, listener update" />
+    <MESSAGE value="add integration test" />
+    <option name="LAST_COMMIT_MESSAGE" value="add integration test" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
