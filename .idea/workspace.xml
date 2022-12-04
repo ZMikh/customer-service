@@ -4,9 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="start testing part">
+    <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/config/SpringFoxConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/service/SupportServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/service/SupportServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/SupportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/SupportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimExecutorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimExecutorDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimStartRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimStartRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimUpdateRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimUpdateRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/dto/ClaimResolutionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/dto/ClaimResolutionDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimResolution/ClaimResolutionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimResolution/ClaimResolutionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/sendToCustomerClaimRegistrationInformation/SendToCustomerClaimAcceptedMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/sendToCustomerClaimRegistrationInformation/SendToCustomerClaimAcceptedMessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670001787352</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="unit test code refactoring">
+      <created>1670092791431</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1670092791431</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -294,7 +314,8 @@
     <MESSAGE value="code refactoring, add claim resolution service" />
     <MESSAGE value="code refactoring, listener update" />
     <MESSAGE value="add integration test" />
-    <option name="LAST_COMMIT_MESSAGE" value="add integration test" />
+    <MESSAGE value="unit test code refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit test code refactoring" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
