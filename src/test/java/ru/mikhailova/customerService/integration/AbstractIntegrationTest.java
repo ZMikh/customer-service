@@ -7,40 +7,96 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @WebAppConfiguration
-@EmbeddedKafka
+@EmbeddedKafka(brokerProperties = {
+        "listeners=PLAINTEXT://localhost:9099",
+        "port=9099"
+})
+@ActiveProfiles(value = "test")
 public abstract class AbstractIntegrationTest {
-    private static final String API_URL = "/api/v1/support/claim";
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
+    private static final String API_URL = "/api/v1/support/claim";
 
-    protected <T> T performGetAll(String url, TypeReference<T> response) throws Exception {
-        ResultActions resultActions = mockMvc.perform(get(API_URL + url))
+    protected String performStart(Object requestBody) throws Exception {
+        MvcResult mvcResult = mockMvc.perform(post(API_URL + "/start")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestBody)))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Claim with id: ")))
+                .andReturn();
+        return mvcResult.getResponse().getContentAsString();
+    }
+
+    protected <T> T performRegistration(Long id, Object requestBody, Class<T> response) throws Exception {
+        ResultActions resultActions = mockMvc.perform(post(API_URL + "/register/" + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestBody)))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+
+        return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
+    }
+
+    protected void performExecuteBasic(Long id) throws Exception {
+        mockMvc.perform(post(API_URL + "/execute/basic/" + id))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    protected void performExecuteAssigned(Long id) throws Exception {
+        mockMvc.perform(post(API_URL + "/execute/assigned/" + id))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+
+    protected <T> T performGetAll(TypeReference<T> response) throws Exception {
+        ResultActions resultActions = mockMvc.perform(get(API_URL + "/get-all")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
         return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
     }
 
-    protected <T> T performStart(Object requestBody, Class<T> response) throws Exception {
-        ResultActions resultActions = mockMvc.perform(post(API_URL + "/start")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestBody)))
+    protected <T> T performGetById(Long id, Class<T> response) throws Exception {
+        ResultActions resultActions = mockMvc.perform(get(API_URL + "/get-by-id/" + id)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
+        return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
+    }
+
+    protected void performDelete(Long id) throws Exception {
+        mockMvc.perform(delete(API_URL + "/delete-by-id/" + id))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    protected <T> T performUpdate(Long id, Object requestBody, Class<T> response) throws Exception {
+        ResultActions resultActions = mockMvc.perform(patch(API_URL + "/update-by-id/" + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestBody)))
+                .andDo(print()).andExpect(status().isOk());
         return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
     }
 

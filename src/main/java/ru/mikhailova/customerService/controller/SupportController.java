@@ -60,13 +60,13 @@ public class SupportController {
     }
 
     @DeleteMapping("/delete-by-id/{id}")
-    @ApiOperation("Удаление заявки")
+    @ApiOperation("Удаление заявки по идентификатору")
     public void delete(@PathVariable Long id) {
         service.deleteClaimById(id);
     }
 
     @PatchMapping("/update-by-id/{id}")
-    @ApiOperation("Обновление заявки")
+    @ApiOperation("Обновление заявки по идентификатору")
     public ClaimDto update(@PathVariable Long id,
                            @RequestBody ClaimUpdateRequestDto claimUpdateRequestDto) {
         ClaimUpdate claimUpdate = mapper.toClaimUpdate(claimUpdateRequestDto);
