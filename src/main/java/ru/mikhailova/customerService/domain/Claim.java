@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @NamedEntityGraph(name = "Claim.executor",
         attributeNodes = @NamedAttributeNode(value = "executor"))
-public class Claim {
+public class  Claim {
     /**
      * Идентификатор заявки
      */
@@ -27,9 +27,9 @@ public class Claim {
      */
     private String customerContactInfo;
     /**
-     * Время регистрации заявки
+     * Время отправки обращения
      */
-    private LocalDateTime claimRegistrationTime;
+    private LocalDateTime claimCreatedTime;
     /**
      * Тип заявки
      */

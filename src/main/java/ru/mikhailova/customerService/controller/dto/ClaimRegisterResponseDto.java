@@ -13,8 +13,8 @@ public class ClaimRegisterResponseDto {
     private Long id;
     @ApiModelProperty("Контактные данные клиента")
     private String customerContactInfo;
-    @ApiModelProperty("Время регистрации заявки")
-    private LocalDateTime claimRegistrationTime;
+    @ApiModelProperty("Время отправки обращения")
+    private LocalDateTime claimCreatedTime;
     @ApiModelProperty("Тип заявки")
     private String claimType;
     @ApiModelProperty("Статус заявки")

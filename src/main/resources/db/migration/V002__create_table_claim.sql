@@ -1,7 +1,7 @@
 CREATE TABLE claim (
     id                          BIGINT PRIMARY KEY,
     customer_contact_info       VARCHAR,
-    claim_registration_time     TIMESTAMP,
+    claim_created_time          TIMESTAMP,
     claim_type                  VARCHAR,
     claim_state                 VARCHAR,
     description                 VARCHAR,

@@ -21,7 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IntegrationTest extends AbstractIntegrationTest {
     @Autowired
     private ClaimRepository claimRepository;
-
     @Autowired
     private ExecutorRepository executorRepository;
     private final TypeReference<List<ClaimDto>> typeReference = new TypeReference<List<ClaimDto>>() {
@@ -35,18 +34,8 @@ public class IntegrationTest extends AbstractIntegrationTest {
         dto.setCustomerContactInfo("+147896325");
         dto.setDescription("Application upgrade");
 
-        String start = performStart(dto);
-        String s = start.replace("Claim with id: ", "");
-        String stringId = s.replace(" is sent to registration", "");
-        Long id = Long.parseLong(stringId);
-        claim = claimRepository.findById(id).orElseThrow();
-    }
-
-    protected Long getId(String start) {
-        String s = start.replace("Claim with id: ", "");
-        String stringId = s.replace(" is sent to registration", "");
-
-        return Long.parseLong(stringId);
+        String responseAsString = performStart(dto);
+        claim = claimRepository.findById(getId(responseAsString)).orElseThrow();
     }
 
     @AfterEach
@@ -54,17 +43,18 @@ public class IntegrationTest extends AbstractIntegrationTest {
         claimRepository.deleteAll();
     }
 
-
     @Test
     void couldRegisterClaim() throws Exception {
         ClaimRegisterRequestDto dto = new ClaimRegisterRequestDto();
         claim.setExecutor(getRandomExecutor());
         claim.setIsAssigned(true);
         claimRepository.save(claim);
+
         ClaimRegisterResponseDto responseDto = performRegistration(claim.getId(), dto, ClaimRegisterResponseDto.class);
-        assertThat(responseDto.getClaimRegistrationTime()).isBetween(
+
+        assertThat(responseDto.getClaimCreatedTime()).isBetween(
                 LocalDateTime.of(2022, 12, 6, 0, 0, 0),
-                LocalDateTime.of(2022, 12, 7, 0, 0, 0)
+                LocalDateTime.of(2023, 12, 6, 0, 0, 0)
         );
     }
 
@@ -104,7 +94,7 @@ public class IntegrationTest extends AbstractIntegrationTest {
     void couldGetClaimById() throws Exception {
         ClaimDto dto = performGetById(claim.getId(), ClaimDto.class);
 
-        assertThat(dto.getClaimRegistrationTime()).isBefore(LocalDateTime.now());
+        assertThat(dto.getClaimCreatedTime()).isBefore(LocalDateTime.now());
     }
 
     @Test
@@ -122,6 +112,12 @@ public class IntegrationTest extends AbstractIntegrationTest {
         ClaimDto claimDto = performUpdate(claim.getId(), dto, ClaimDto.class);
 
         assertThat(claimDto.getDescription()).isEqualTo("Change interface");
+    }
+
+    protected Long getId(String responseAsString) {
+        String responseWithRemovedPartBeforeId = responseAsString.replace("Claim with id: ", "");
+        String stringId = responseWithRemovedPartBeforeId.replace(" is sent to registration", "");
+        return Long.parseLong(stringId);
     }
 
     protected ClaimExecutor getRandomExecutor() {

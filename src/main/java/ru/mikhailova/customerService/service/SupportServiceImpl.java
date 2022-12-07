@@ -29,12 +29,12 @@ public class SupportServiceImpl implements SupportService {
     @Transactional
     @Override
     public void startSupport(Claim claim) {
-        claim.setClaimRegistrationTime(LocalDateTime.now());
+        claim.setClaimCreatedTime(LocalDateTime.now());
         Claim savedClaim = claimRepository.save(claim);
 
         Map<String, Object> variables = new HashMap<>();
         variables.put("id", savedClaim.getId());
-        runtimeService.startProcessInstanceByKey("support", variables);
+        runtimeService.startProcessInstanceByMessage("new_claim_message", variables);
     }
 
     @Transactional
@@ -43,7 +43,7 @@ public class SupportServiceImpl implements SupportService {
         Claim claim = claimRepository.findById(id).orElseThrow();
         claim.setExecutor(getRandomExecutor());
         claim.setIsAssigned(claimRegister.getIsAssigned());
-        claimRepository.save(claim);
+        claim.setQueryIsSolved(false);
 
         Task task = taskService.createTaskQuery()
                 .taskDefinitionKey("claimRegistration")
