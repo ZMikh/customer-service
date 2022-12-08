@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/ClaimResolutionMessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/ClaimResolutionMessageListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/ClaimRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/ClaimRegister.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V002__create_table_claim.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V002__create_table_claim.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/IntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/IntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bpmn/support.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bpmn/support.bpmn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/AbstractIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/AbstractIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/IntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/ClaimIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,21 +62,16 @@
       <recent name="ru.mikhailova.customerService.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.App" />
+  <component name="RunManager" selected="JUnit.All in support">
+    <configuration name="All in support" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.mikhailova.customerService.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClaimIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
       <extension name="coverage">
         <pattern>
@@ -89,13 +80,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.integration" />
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.IntegrationTest" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.ClaimIntegrationTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IntegrationTest.couldDeleteClaimById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClaimIntegrationTest.couldCheckClaimIsNotResolved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
       <extension name="coverage">
         <pattern>
@@ -104,14 +95,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.integration" />
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.IntegrationTest" />
-      <option name="METHOD_NAME" value="couldDeleteClaimById" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.ClaimIntegrationTest" />
+      <option name="METHOD_NAME" value="couldCheckClaimIsNotResolved" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IntegrationTest.couldGetClaimById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClaimIntegrationTest.couldCheckClaimIsResolved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
       <extension name="coverage">
         <pattern>
@@ -120,14 +111,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.integration" />
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.IntegrationTest" />
-      <option name="METHOD_NAME" value="couldGetClaimById" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.ClaimIntegrationTest" />
+      <option name="METHOD_NAME" value="couldCheckClaimIsResolved" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IntegrationTest.couldUpdateClaim" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClaimIntegrationTest.couldCheckClaimResolutionMessageFromClient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
       <extension name="coverage">
         <pattern>
@@ -136,8 +127,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.integration" />
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.IntegrationTest" />
-      <option name="METHOD_NAME" value="couldUpdateClaim" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.ClaimIntegrationTest" />
+      <option name="METHOD_NAME" value="couldCheckClaimResolutionMessageFromClient" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -145,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.IntegrationTest" />
-        <item itemvalue="JUnit.IntegrationTest.couldGetClaimById" />
-        <item itemvalue="JUnit.IntegrationTest.couldDeleteClaimById" />
-        <item itemvalue="JUnit.IntegrationTest.couldUpdateClaim" />
+        <item itemvalue="JUnit.All in support" />
+        <item itemvalue="JUnit.ClaimIntegrationTest.couldCheckClaimIsNotResolved" />
+        <item itemvalue="JUnit.ClaimIntegrationTest.couldCheckClaimIsResolved" />
+        <item itemvalue="JUnit.ClaimIntegrationTest" />
+        <item itemvalue="JUnit.ClaimIntegrationTest.couldCheckClaimResolutionMessageFromClient" />
       </list>
     </recent_temporary>
   </component>
@@ -288,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670337801852</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="code refactoring, start service update">
+      <created>1670430953547</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1670430953547</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -333,7 +331,8 @@
     <MESSAGE value="add swagger, code refactoring" />
     <MESSAGE value="integration test update" />
     <MESSAGE value="application-test.yaml add, integration test update, changed migration V001 for h2 requirements; swagger api operation change in controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="application-test.yaml add, integration test update, changed migration V001 for h2 requirements; swagger api operation change in controller" />
+    <MESSAGE value="code refactoring, start service method update" />
+    <option name="LAST_COMMIT_MESSAGE" value="code refactoring, start service method update" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

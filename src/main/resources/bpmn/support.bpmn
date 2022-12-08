@@ -78,7 +78,7 @@
       <bpmn:extensionElements />
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_01mek3s" sourceRef="Gateway_1t72k83" targetRef="notResolvedState">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isNotResolved==true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${queryIsSolved==false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:intermediateThrowEvent id="notResolvedState" name="Вопрос по заявке не решен">
       <bpmn:extensionElements>
@@ -197,11 +197,6 @@
         <di:waypoint x="680" y="177" />
         <di:waypoint x="755" y="177" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0ixrvdt_di" bpmnElement="Flow_0ixrvdt">
-        <di:waypoint x="780" y="202" />
-        <di:waypoint x="780" y="280" />
-        <di:waypoint x="860" y="280" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_18c8if6_di" bpmnElement="Flow_18c8if6">
         <di:waypoint x="805" y="177" />
         <di:waypoint x="930" y="177" />
@@ -248,6 +243,11 @@
         <di:waypoint x="1240" y="280" />
         <di:waypoint x="1270" y="280" />
         <di:waypoint x="1270" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ixrvdt_di" bpmnElement="Flow_0ixrvdt">
+        <di:waypoint x="780" y="202" />
+        <di:waypoint x="780" y="280" />
+        <di:waypoint x="860" y="280" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

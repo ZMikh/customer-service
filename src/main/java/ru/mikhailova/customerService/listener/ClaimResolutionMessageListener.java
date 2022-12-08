@@ -18,9 +18,10 @@ public class ClaimResolutionMessageListener {
     public void claimResolutionListen(JsonNode dto) throws JsonProcessingException {
         ClaimResolutionDto resultDto = new ObjectMapper().treeToValue(dto, ClaimResolutionDto.class);
 
+
         runtimeService.createMessageCorrelation("claim_resolution_message")
                 .processInstanceVariableEquals("id", resultDto.getId())
-                .processInstanceVariableEquals("queryIsSolved", resultDto.getQueryIsSolved())
+                .setVariable("queryIsSolved", resultDto.getQueryIsSolved())
                 .correlateWithResult();
     }
 }

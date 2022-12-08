@@ -99,5 +99,4 @@ public abstract class AbstractIntegrationTest {
                 .andDo(print()).andExpect(status().isOk());
         return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
     }
-
 }

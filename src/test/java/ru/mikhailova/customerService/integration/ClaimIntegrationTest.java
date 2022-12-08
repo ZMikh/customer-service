@@ -5,10 +5,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import ru.mikhailova.customerService.controller.dto.*;
 import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.domain.ClaimExecutor;
 import ru.mikhailova.customerService.domain.ClaimState;
+import ru.mikhailova.customerService.listener.dto.ClaimResolutionDto;
 import ru.mikhailova.customerService.repository.ClaimRepository;
 import ru.mikhailova.customerService.repository.ExecutorRepository;
 
@@ -18,7 +21,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IntegrationTest extends AbstractIntegrationTest {
+public class ClaimIntegrationTest extends AbstractIntegrationTest {
     @Autowired
     private ClaimRepository claimRepository;
     @Autowired
@@ -26,6 +29,15 @@ public class IntegrationTest extends AbstractIntegrationTest {
     private final TypeReference<List<ClaimDto>> typeReference = new TypeReference<List<ClaimDto>>() {
     };
     private Claim claim;
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;
+
+    @Value("${kafka.topic.new-claim}")
+    private String newClaimTopic;
+
+    @Value("${kafka.topic.claim-resolution}")
+    private String claimResolutionTopic;
+
 
     @BeforeEach
     void setUp() throws Exception {
@@ -112,6 +124,50 @@ public class IntegrationTest extends AbstractIntegrationTest {
         ClaimDto claimDto = performUpdate(claim.getId(), dto, ClaimDto.class);
 
         assertThat(claimDto.getDescription()).isEqualTo("Change interface");
+    }
+
+    @Test
+    void couldCheckClaimIsNotResolved() throws Exception {
+        //given
+        ClaimRegisterRequestDto dto = new ClaimRegisterRequestDto();
+        claim.setExecutor(getRandomExecutor());
+
+        performRegistration(claim.getId(), dto, ClaimRegisterResponseDto.class);
+        performExecuteBasic(claim.getId());
+
+        ClaimResolutionDto resolutionDto = new ClaimResolutionDto();
+        resolutionDto.setId(claim.getId());
+        resolutionDto.setQueryIsSolved(false);
+
+        //when
+        kafkaTemplate.send(claimResolutionTopic, resolutionDto);
+        Thread.sleep(1000);
+
+        //then
+        Claim claimResolved = claimRepository.findById(claim.getId()).orElseThrow();
+        assertThat(claimResolved.getClaimState()).isEqualTo(ClaimState.NOT_RESOLVED);
+    }
+
+    @Test
+    void couldCheckClaimIsResolved() throws Exception {
+        //given
+        ClaimRegisterRequestDto dto = new ClaimRegisterRequestDto();
+        claim.setExecutor(getRandomExecutor());
+
+        performRegistration(claim.getId(), dto, ClaimRegisterResponseDto.class);
+        performExecuteBasic(claim.getId());
+
+        ClaimResolutionDto resolutionDto = new ClaimResolutionDto();
+        resolutionDto.setId(claim.getId());
+        resolutionDto.setQueryIsSolved(true);
+
+        //when
+        kafkaTemplate.send(claimResolutionTopic, resolutionDto);
+        Thread.sleep(1000);
+
+        //then
+        Claim claimResolved = claimRepository.findById(claim.getId()).orElseThrow();
+        assertThat(claimResolved.getClaimState()).isEqualTo(ClaimState.FINISHED);
     }
 
     protected Long getId(String responseAsString) {
