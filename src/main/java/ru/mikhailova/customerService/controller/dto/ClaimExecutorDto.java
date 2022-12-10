@@ -11,4 +11,6 @@ public class ClaimExecutorDto {
     private Long id;
     @ApiModelProperty("Имя исполнителя заявки")
     private String name;
+    @ApiModelProperty("Исполнитель является специалистом по общим вопросам")
+    private Boolean generalSpecialist;
 }

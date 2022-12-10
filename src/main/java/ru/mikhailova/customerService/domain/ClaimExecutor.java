@@ -25,6 +25,10 @@ public class ClaimExecutor {
      */
     private String name;
     /**
+     * Исполнитель является специалистом по общим вопросам
+     */
+    private Boolean generalSpecialist;
+    /**
      * Список заявок исполнителя
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "executor")
