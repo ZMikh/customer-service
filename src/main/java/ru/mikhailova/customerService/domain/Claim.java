@@ -25,6 +25,7 @@ public class  Claim {
     /**
      * Контактные данные клиента
      */
+    @Column(nullable = false)
     private String customerContactInfo;
     /**
      * Время отправки обращения
@@ -34,6 +35,7 @@ public class  Claim {
      * Тип заявки
      */
     @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     private ClaimType claimType;
     /**
      * Статус заявки
@@ -43,6 +45,7 @@ public class  Claim {
     /**
      * Описание заявки
      */
+    @Column(nullable = false)
     private String description;
     /**
      * Заявка переназначена на специалиста по работе со специфичными запросами
@@ -58,6 +61,14 @@ public class  Claim {
      * Время завершения заявки
      */
     private LocalDateTime claimFinishedTime;
+    /**
+     * Ответ на запрос по заявке
+     */
+    private String claimAnswer;
+    /**
+     * Примечание
+     */
+    private String notes;
     /**
      * Исполнитель заявки
      */

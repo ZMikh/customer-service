@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.mikhailova.customerService.controller.dto.*;
+import ru.mikhailova.customerService.controller.exceptionHandler.ClaimAnswerExceptionHandler;
 import ru.mikhailova.customerService.controller.mapper.ClaimMapper;
 import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.service.ClaimRegister;
@@ -11,6 +12,7 @@ import ru.mikhailova.customerService.service.ClaimUpdate;
 import ru.mikhailova.customerService.service.SupportService;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/support/claim")
@@ -27,7 +29,7 @@ public class SupportController {
         return "Claim with id: " + claim.getId() + " is sent to registration";
     }
 
-    @PostMapping("/register/{id}")
+    @PatchMapping("/register/{id}")
     @ApiOperation("Регистрация заявки")
     public ClaimRegisterResponseDto register(@PathVariable Long id,
                                              @RequestBody ClaimRegisterRequestDto claimRegisterRequestDto) {
@@ -35,16 +37,23 @@ public class SupportController {
         return mapper.toClaimRegisterResponseDto(service.registerClaim(id, claimRegister));
     }
 
-    @PostMapping("/execute/basic/{id}")
+    @PatchMapping("/execute/basic/{id}")
     @ApiOperation("Выполнение заявки общего типа исполнителем")
-    public void executeBasic(@PathVariable Long id) {
-        service.executeBasicClaim(id);
+    public ClaimDto executeBasic(@PathVariable Long id,
+                                 @RequestBody ClaimAnswerRequestDto claimAnswerRequestDto) {
+        Claim claim = service.executeBasicClaim(id, mapper.toClaimAnswer(claimAnswerRequestDto));
+        return mapper.toClaimDto(claim);
     }
 
-    @PostMapping("/execute/assigned/{id}")
+    @PatchMapping("/execute/assigned/{id}")
     @ApiOperation("Выполнение заявки специалистом по работе со специфичными запросами")
-    public void executeAssigned(@PathVariable Long id) {
-        service.executeAssignedClaim(id);
+    public ClaimDto executeAssigned(@PathVariable Long id,
+                                    @RequestBody ClaimAnswerRequestDto claimAnswerRequestDto) throws ClaimAnswerExceptionHandler {
+        if (Objects.isNull(claimAnswerRequestDto.getClaimAnswer())) {
+            throw new ClaimAnswerExceptionHandler();
+        }
+        Claim claim = service.executeAssignedClaim(id, mapper.toClaimAnswer(claimAnswerRequestDto));
+        return mapper.toClaimDto(claim);
     }
 
     @GetMapping("/get-all")

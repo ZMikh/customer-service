@@ -12,6 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -47,7 +48,7 @@ public abstract class AbstractIntegrationTest {
     }
 
     protected <T> T performRegistration(Long id, Object requestBody, Class<T> response) throws Exception {
-        ResultActions resultActions = mockMvc.perform(post(API_URL + "/register/" + id)
+        ResultActions resultActions = mockMvc.perform(patch(API_URL + "/register/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestBody)))
                 .andDo(print())
@@ -57,18 +58,31 @@ public abstract class AbstractIntegrationTest {
         return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
     }
 
-    protected void performExecuteBasic(Long id) throws Exception {
-        mockMvc.perform(post(API_URL + "/execute/basic/" + id))
+    protected <T> T performExecuteBasic(Long id, Object requestBody, Class<T> response) throws Exception {
+        ResultActions resultActions = mockMvc.perform(patch(API_URL + "/execute/basic/" + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestBody)))
                 .andDo(print())
                 .andExpect(status().isOk());
+        return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
     }
 
-    protected void performExecuteAssigned(Long id) throws Exception {
-        mockMvc.perform(post(API_URL + "/execute/assigned/" + id))
+    protected <T> T performExecuteAssigned(Long id, Object requestBody, Class<T> response) throws Exception {
+        ResultActions resultActions = mockMvc.perform(patch(API_URL + "/execute/assigned/" + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestBody)))
                 .andDo(print())
                 .andExpect(status().isOk());
+        return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
     }
 
+    protected ResultActions performClaimAnswerException(Long id, String executionType, Object requestBody, ResultMatcher resultMatcher) throws Exception {
+        return mockMvc.perform(patch(API_URL + "/execute" + executionType + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestBody)))
+                .andDo(print())
+                .andExpect(resultMatcher);
+    }
 
     protected <T> T performGetAll(TypeReference<T> response) throws Exception {
         ResultActions resultActions = mockMvc.perform(get(API_URL + "/get-all")

@@ -25,16 +25,12 @@ import static org.mockito.Mockito.*;
 class SupportServiceImplTest {
     @Mock
     private ClaimRepository claimRepository;
-
     @Mock
     private ExecutorRepository executorRepository;
-
     @Mock
     private RuntimeService runtimeService;
-
     @Mock
     private TaskService taskService;
-
     @Captor
     private ArgumentCaptor<Claim> captor;
     private SupportServiceImpl service;
@@ -84,11 +80,11 @@ class SupportServiceImplTest {
     void couldUpdateClaimById() {
         when(claimRepository.findById(any())).thenReturn(ofNullable(claim));
         ClaimUpdate claimUpdate = new ClaimUpdate();
-        claimUpdate.setDescription("missed item");
+        claimUpdate.setNotes("missed item");
 
         service.updateClaimById(TEST_ID, claimUpdate);
 
         verify(claimRepository, times(1)).save(captor.capture());
-        assertThat(captor.getValue().getDescription()).isEqualTo(claimUpdate.getDescription());
+        assertThat(captor.getValue().getNotes()).isEqualTo(claimUpdate.getNotes());
     }
 }

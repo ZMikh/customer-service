@@ -7,25 +7,23 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.test.web.servlet.ResultActions;
 import ru.mikhailova.customerService.controller.dto.*;
 import ru.mikhailova.customerService.domain.Claim;
-import ru.mikhailova.customerService.domain.ClaimExecutor;
 import ru.mikhailova.customerService.domain.ClaimState;
 import ru.mikhailova.customerService.listener.dto.ClaimResolutionDto;
 import ru.mikhailova.customerService.repository.ClaimRepository;
-import ru.mikhailova.customerService.repository.ExecutorRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ClaimIntegrationTest extends AbstractIntegrationTest {
     @Autowired
     private ClaimRepository claimRepository;
-    @Autowired
-    private ExecutorRepository executorRepository;
+
     private final TypeReference<List<ClaimDto>> typeReference = new TypeReference<List<ClaimDto>>() {
     };
     private Claim claim;
@@ -58,9 +56,7 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
     @Test
     void couldRegisterClaim() throws Exception {
         ClaimRegisterRequestDto dto = new ClaimRegisterRequestDto();
-        claim.setExecutor(getRandomExecutor());
-        claim.setIsAssigned(true);
-        claimRepository.save(claim);
+        dto.setIsAssigned(true);
 
         ClaimRegisterResponseDto responseDto = performRegistration(claim.getId(), dto, ClaimRegisterResponseDto.class);
 
@@ -68,29 +64,42 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
                 LocalDateTime.of(2022, 12, 6, 0, 0, 0),
                 LocalDateTime.of(2023, 12, 6, 0, 0, 0)
         );
+        assertThat(responseDto.getClaimState()).isEqualTo(ClaimState.ASSIGNED.toString());
     }
 
     @Test
     void couldExecuteGeneralClaim() throws Exception {
-        ClaimRegisterRequestDto dto = new ClaimRegisterRequestDto();
-        claim.setExecutor(getRandomExecutor());
+        //when
+        ClaimRegisterRequestDto registerRequestDto = new ClaimRegisterRequestDto();
+        registerRequestDto.setIsAssigned(false);
+        performRegistration(claim.getId(), registerRequestDto, ClaimRegisterResponseDto.class);
 
-        performRegistration(claim.getId(), dto, ClaimRegisterResponseDto.class);
-        performExecuteBasic(claim.getId());
+        ClaimAnswerRequestDto answerRequestDto = new ClaimAnswerRequestDto();
+        answerRequestDto.setClaimAnswer("Will be updated");
 
+        //when
+        ClaimDto dto = performExecuteBasic(claim.getId(), answerRequestDto, ClaimDto.class);
+
+        //then
         Claim executedClaim = claimRepository.findById(claim.getId()).orElseThrow();
         assertThat(executedClaim.getClaimState()).isEqualTo(ClaimState.PROCESSED);
+        assertThat(dto.getClaimState()).isEqualTo(ClaimState.PROCESSED.toString());
     }
 
     @Test
     void couldExecuteClaimByAnotherExecutor() throws Exception {
+        //given
         ClaimRegisterRequestDto dto = new ClaimRegisterRequestDto();
         dto.setIsAssigned(true);
-        claim.setExecutor(getRandomExecutor());
-
         performRegistration(claim.getId(), dto, ClaimRegisterResponseDto.class);
-        performExecuteAssigned(claim.getId());
 
+        ClaimAnswerRequestDto answerRequestDto = new ClaimAnswerRequestDto();
+        answerRequestDto.setClaimAnswer("Will be updated");
+
+        //when
+        performExecuteAssigned(claim.getId(), answerRequestDto, ClaimDto.class);
+
+        //then
         Claim executedClaim = claimRepository.findById(claim.getId()).orElseThrow();
         assertThat(executedClaim.getClaimFinishedTime()).isNotNull();
     }
@@ -119,21 +128,21 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
     @Test
     void couldUpdateClaim() throws Exception {
         ClaimUpdateRequestDto dto = new ClaimUpdateRequestDto();
-        dto.setDescription("Change interface");
+        dto.setNotes("Change interface");
 
         ClaimDto claimDto = performUpdate(claim.getId(), dto, ClaimDto.class);
 
-        assertThat(claimDto.getDescription()).isEqualTo("Change interface");
+        assertThat(claimDto.getNotes()).isEqualTo("Change interface");
     }
 
     @Test
     void couldCheckClaimIsNotResolved() throws Exception {
         //given
-        ClaimRegisterRequestDto dto = new ClaimRegisterRequestDto();
-        claim.setExecutor(getRandomExecutor());
+        performRegistration(claim.getId(), new ClaimRegisterRequestDto(), ClaimRegisterResponseDto.class);
 
-        performRegistration(claim.getId(), dto, ClaimRegisterResponseDto.class);
-        performExecuteBasic(claim.getId());
+        ClaimAnswerRequestDto answerRequestDto = new ClaimAnswerRequestDto();
+        answerRequestDto.setClaimAnswer("Will be updated");
+        performExecuteBasic(claim.getId(), answerRequestDto, ClaimDto.class);
 
         ClaimResolutionDto resolutionDto = new ClaimResolutionDto();
         resolutionDto.setId(claim.getId());
@@ -152,10 +161,12 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
     void couldCheckClaimIsResolved() throws Exception {
         //given
         ClaimRegisterRequestDto dto = new ClaimRegisterRequestDto();
-        claim.setExecutor(getRandomExecutor());
-
+        dto.setIsAssigned(true);
         performRegistration(claim.getId(), dto, ClaimRegisterResponseDto.class);
-        performExecuteBasic(claim.getId());
+
+        ClaimAnswerRequestDto answerRequestDto = new ClaimAnswerRequestDto();
+        answerRequestDto.setClaimAnswer("Won't be updated");
+        performExecuteAssigned(claim.getId(), answerRequestDto, ClaimDto.class);
 
         ClaimResolutionDto resolutionDto = new ClaimResolutionDto();
         resolutionDto.setId(claim.getId());
@@ -170,14 +181,19 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
         assertThat(claimResolved.getClaimState()).isEqualTo(ClaimState.FINISHED);
     }
 
+    @Test
+    void couldCheckExceptionHandlerIfClaimAnswerIsNull() throws Exception {
+        performRegistration(claim.getId(), new ClaimRegisterRequestDto(), ClaimRegisterResponseDto.class);
+
+        ResultActions resultActions = performClaimAnswerException(claim.getId(), "/assigned/",
+                new ClaimAnswerRequestDto(), status().isNotFound());
+
+        assertThat(resultActions.andReturn().getResponse().getContentAsString()).isEqualTo("There's no answer to claim");
+    }
+
     protected Long getId(String responseAsString) {
         String responseWithRemovedPartBeforeId = responseAsString.replace("Claim with id: ", "");
         String stringId = responseWithRemovedPartBeforeId.replace(" is sent to registration", "");
         return Long.parseLong(stringId);
-    }
-
-    protected ClaimExecutor getRandomExecutor() {
-        Long executorId = (long) ThreadLocalRandom.current().nextInt(1, executorRepository.findAll().size() + 1);
-        return executorRepository.findById(executorId).orElseThrow();
     }
 }

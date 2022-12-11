@@ -8,6 +8,7 @@ import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.listener.dto.ClaimResolutionDto;
 import ru.mikhailova.customerService.service.ClaimRegister;
 import ru.mikhailova.customerService.service.ClaimUpdate;
+import ru.mikhailova.customerService.service.stateTransition.ClaimAnswer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +50,16 @@ public class ClaimMapper {
     public ClaimRegisterResponseDto toClaimRegisterResponseDto(Claim claim) {
         return mapper.map(claim, ClaimRegisterResponseDto.class);
     }
+
     public ClaimRegister toClaimRegister(ClaimRegisterRequestDto dto) {
         return mapper.map(dto, ClaimRegister.class);
     }
 
     public ClaimResolutionDto toClaimResolutionDto(Claim claim) {
         return mapper.map(claim, ClaimResolutionDto.class);
+    }
+
+    public ClaimAnswer toClaimAnswer(ClaimAnswerRequestDto dto) {
+        return mapper.map(dto, ClaimAnswer.class);
     }
 }

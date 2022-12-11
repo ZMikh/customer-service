@@ -1,6 +1,7 @@
 package ru.mikhailova.customerService.service;
 
 import ru.mikhailova.customerService.domain.Claim;
+import ru.mikhailova.customerService.service.stateTransition.ClaimAnswer;
 
 import java.util.List;
 
@@ -59,13 +60,17 @@ public interface SupportService {
      * Выполнить заявку общего типа
      *
      * @param id идентификатор заявки
+     * @param claimAnswer ответ на запрос по заявке
+     * @return заявка
      */
-    void executeBasicClaim(Long id);
+    Claim executeBasicClaim(Long id, ClaimAnswer claimAnswer);
 
     /**
      * Выполнить заявку переназначенную на специалиста по работе со специфичными запросами
      *
      * @param id идентификатор заявки
+     * @param claimAnswer ответ на запрос по заявке
+     * @return заявка
      */
-    void executeAssignedClaim(Long id);
+    Claim executeAssignedClaim(Long id, ClaimAnswer claimAnswer);
 }

@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@ApiModel("Парамтры для запроса при обновлении заявки")
+@ApiModel("Параметры для запроса при обновлении заявки")
 public class ClaimUpdateRequestDto {
-    @ApiModelProperty("Описание заявки")
-    private String description;
+    @ApiModelProperty("Примечание")
+    private String notes;
 }

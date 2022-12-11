@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class ClaimUpdate {
     /**
-     * Описание заявки
+     * Примечание
      */
-    private String description;
+    private String notes;
 }

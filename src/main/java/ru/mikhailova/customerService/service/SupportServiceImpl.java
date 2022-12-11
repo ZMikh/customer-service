@@ -10,6 +10,7 @@ import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.domain.ClaimExecutor;
 import ru.mikhailova.customerService.repository.ClaimRepository;
 import ru.mikhailova.customerService.repository.ExecutorRepository;
+import ru.mikhailova.customerService.service.stateTransition.ClaimAnswer;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -30,6 +31,14 @@ public class SupportServiceImpl implements SupportService {
     @Override
     public void startSupport(Claim claim) {
         claim.setClaimCreatedTime(LocalDateTime.now());
+
+        List<ClaimExecutor> all = executorRepository.findAll();
+        ClaimExecutor executor = all.stream()
+                .filter(claimExecutor -> claimExecutor.getGeneralSpecialist().equals(true))
+                .findAny()
+                .orElseThrow();
+        claim.setExecutor(executor);
+
         Claim savedClaim = claimRepository.save(claim);
 
         Map<String, Object> variables = new HashMap<>();
@@ -41,9 +50,15 @@ public class SupportServiceImpl implements SupportService {
     @Override
     public Claim registerClaim(Long id, ClaimRegister claimRegister) {
         Claim claim = claimRepository.findById(id).orElseThrow();
-        claim.setExecutor(getRandomExecutor());
         claim.setIsAssigned(claimRegister.getIsAssigned());
-        claim.setQueryIsSolved(false);
+
+        if (Boolean.TRUE.equals(claim.getIsAssigned()) && claim.getExecutor().getGeneralSpecialist()) {
+            ClaimExecutor executor = executorRepository.findAll().stream()
+                    .filter(claimExecutor -> claimExecutor.getGeneralSpecialist().equals(false))
+                    .findAny()
+                    .orElseThrow();
+            claim.setExecutor(executor);
+        }
 
         Task task = taskService.createTaskQuery()
                 .taskDefinitionKey("claimRegistration")
@@ -59,8 +74,9 @@ public class SupportServiceImpl implements SupportService {
 
     @Transactional
     @Override
-    public void executeBasicClaim(Long id) {
+    public Claim executeBasicClaim(Long id, ClaimAnswer claimAnswer) {
         Claim claim = claimRepository.findById(id).orElseThrow();
+        claim.setClaimAnswer(claimAnswer.getClaimAnswer());
         claim.setClaimFinishedTime(LocalDateTime.now());
 
         Task task = taskService.createTaskQuery()
@@ -71,12 +87,15 @@ public class SupportServiceImpl implements SupportService {
             throw new RuntimeException();
         }
         taskService.complete(task.getId());
+
+        return claim;
     }
 
     @Transactional
     @Override
-    public void executeAssignedClaim(Long id) {
+    public Claim executeAssignedClaim(Long id, ClaimAnswer claimAnswer) {
         Claim claim = claimRepository.findById(id).orElseThrow();
+        claim.setClaimAnswer(claimAnswer.getClaimAnswer());
         claim.setClaimFinishedTime(LocalDateTime.now());
 
         Task task = taskService.createTaskQuery()
@@ -87,6 +106,8 @@ public class SupportServiceImpl implements SupportService {
             throw new RuntimeException();
         }
         taskService.complete(task.getId());
+
+        return claim;
     }
 
     @Transactional(readOnly = true)
@@ -111,7 +132,7 @@ public class SupportServiceImpl implements SupportService {
     @Override
     public Claim updateClaimById(Long id, ClaimUpdate claimUpdate) {
         Claim claim = claimRepository.findById(id).orElseThrow();
-        claim.setDescription(claimUpdate.getDescription());
+        claim.setNotes(claimUpdate.getNotes());
         claimRepository.save(claim);
         return claim;
     }
