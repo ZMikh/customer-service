@@ -9,7 +9,11 @@ public enum ClaimState {
      */
     NEW,
     /**
-     * Заяка принята
+     * Заявка сформирована
+     */
+    CREATED,
+    /**
+     * Заявка принята
      */
     ACCEPTED,
     /**

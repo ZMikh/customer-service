@@ -40,7 +40,10 @@ public class SupportController {
     @PatchMapping("/execute/basic/{id}")
     @ApiOperation("Выполнение заявки общего типа исполнителем")
     public ClaimDto executeBasic(@PathVariable Long id,
-                                 @RequestBody ClaimAnswerRequestDto claimAnswerRequestDto) {
+                                 @RequestBody ClaimAnswerRequestDto claimAnswerRequestDto) throws ClaimAnswerExceptionHandler {
+        if (Objects.isNull(claimAnswerRequestDto.getClaimAnswer())) {
+            throw new ClaimAnswerExceptionHandler();
+        }
         Claim claim = service.executeBasicClaim(id, mapper.toClaimAnswer(claimAnswerRequestDto));
         return mapper.toClaimDto(claim);
     }

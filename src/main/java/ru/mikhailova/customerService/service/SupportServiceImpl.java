@@ -13,6 +13,7 @@ import ru.mikhailova.customerService.repository.ExecutorRepository;
 import ru.mikhailova.customerService.service.stateTransition.ClaimAnswer;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +33,9 @@ public class SupportServiceImpl implements SupportService {
     public void startSupport(Claim claim) {
         claim.setClaimCreatedTime(LocalDateTime.now());
 
-        List<ClaimExecutor> all = executorRepository.findAll();
-        ClaimExecutor executor = all.stream()
+        List<ClaimExecutor> claimExecutors = executorRepository.findAll();
+        Collections.shuffle(claimExecutors);
+        ClaimExecutor executor = claimExecutors.stream()
                 .filter(claimExecutor -> claimExecutor.getGeneralSpecialist().equals(true))
                 .findAny()
                 .orElseThrow();
@@ -52,8 +54,10 @@ public class SupportServiceImpl implements SupportService {
         Claim claim = claimRepository.findById(id).orElseThrow();
         claim.setIsAssigned(claimRegister.getIsAssigned());
 
-        if (Boolean.TRUE.equals(claim.getIsAssigned()) && claim.getExecutor().getGeneralSpecialist()) {
-            ClaimExecutor executor = executorRepository.findAll().stream()
+        if (Boolean.TRUE.equals(claimRegister.getIsAssigned()) && claim.getExecutor().getGeneralSpecialist()) {
+            List<ClaimExecutor> claimExecutors = executorRepository.findAll();
+            Collections.shuffle(claimExecutors);
+            ClaimExecutor executor = claimExecutors.stream()
                     .filter(claimExecutor -> claimExecutor.getGeneralSpecialist().equals(false))
                     .findAny()
                     .orElseThrow();

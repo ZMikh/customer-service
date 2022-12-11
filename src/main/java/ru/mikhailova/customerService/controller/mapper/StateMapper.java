@@ -8,6 +8,7 @@ import java.util.Map;
 @Component
 public class StateMapper {
     private static final Map<String, ClaimState> map = Map.of(
+            "createdClaim", ClaimState.CREATED,
             "acceptedState", ClaimState.ACCEPTED,
             "assignedState", ClaimState.ASSIGNED,
             "processedState", ClaimState.PROCESSED,
