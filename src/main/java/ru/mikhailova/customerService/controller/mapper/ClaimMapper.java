@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import ru.mikhailova.customerService.controller.dto.*;
 import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.listener.dto.ClaimResolutionDto;
+import ru.mikhailova.customerService.service.ClaimAnswer;
 import ru.mikhailova.customerService.service.ClaimRegister;
 import ru.mikhailova.customerService.service.ClaimUpdate;
-import ru.mikhailova.customerService.service.stateTransition.ClaimAnswer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,5 +61,8 @@ public class ClaimMapper {
 
     public ClaimAnswer toClaimAnswer(ClaimAnswerRequestDto dto) {
         return mapper.map(dto, ClaimAnswer.class);
+    }
+    public ClaimAnswerToCustomerDto toClaimAnswerToCustomerDto(Claim claim) {
+        return mapper.map(claim, ClaimAnswerToCustomerDto.class);
     }
 }

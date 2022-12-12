@@ -1,4 +1,4 @@
-package ru.mikhailova.customerService.service.sendToCustomerClaimRegistrationInformation;
+package ru.mikhailova.customerService.service.claimRegistrationInformation;
 
 /**
  * Отправка заявителю уведомления о получении заявки

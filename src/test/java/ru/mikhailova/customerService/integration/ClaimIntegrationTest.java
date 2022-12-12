@@ -33,8 +33,8 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
     @Value("${kafka.topic.new-claim}")
     private String newClaimTopic;
 
-    @Value("${kafka.topic.claim-resolution}")
-    private String claimResolutionTopic;
+    @Value("${kafka.topic.claim-client-resolution}")
+    private String claimClientResolutionTopic;
 
 
     @BeforeEach
@@ -149,7 +149,7 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
         resolutionDto.setQueryIsSolved(false);
 
         //when
-        kafkaTemplate.send(claimResolutionTopic, resolutionDto);
+        kafkaTemplate.send(claimClientResolutionTopic, resolutionDto);
         Thread.sleep(1000);
 
         //then
@@ -173,7 +173,7 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
         resolutionDto.setQueryIsSolved(true);
 
         //when
-        kafkaTemplate.send(claimResolutionTopic, resolutionDto);
+        kafkaTemplate.send(claimClientResolutionTopic, resolutionDto);
         Thread.sleep(1000);
 
         //then

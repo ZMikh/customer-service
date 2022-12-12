@@ -25,8 +25,6 @@ public class ClaimDto {
     private LocalDateTime claimFinishedTime;
     @ApiModelProperty("Исполнитель заявки")
     private ClaimExecutorDto executor;
-    @ApiModelProperty("Решение по заявке принято клиентом")
-    private Boolean queryIsSolved;
     @ApiModelProperty("Ответ на запрос по заявке")
     private String claimAnswer;
     @ApiModelProperty("Примечание")

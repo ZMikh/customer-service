@@ -1,4 +1,4 @@
-package ru.mikhailova.customerService.service.stateTransition;
+package ru.mikhailova.customerService.service;
 
 import lombok.Data;
 

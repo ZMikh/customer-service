@@ -1,4 +1,4 @@
-package ru.mikhailova.customerService.service.claimResolution;
+package ru.mikhailova.customerService.service.claimAnswer;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -8,17 +8,19 @@ import ru.mikhailova.customerService.controller.mapper.ClaimMapper;
 import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.repository.ClaimRepository;
 
+import java.util.Optional;
+
 @Service
-public class ClaimResolutionServiceImpl implements ClaimResolutionService {
+public class SendToCustomerClaimAnswerMessageServiceImpl implements SendToCustomerClaimAnswerMessageService {
     private final ClaimRepository claimRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final String topic;
     private final ClaimMapper mapper;
 
-    public ClaimResolutionServiceImpl(ClaimRepository claimRepository,
-                                      KafkaTemplate<String, Object> kafkaTemplate,
-                                      @Value("${kafka.topic.claim-client-resolution}") String topic,
-                                      ClaimMapper mapper) {
+    public SendToCustomerClaimAnswerMessageServiceImpl(ClaimRepository claimRepository,
+                                                       KafkaTemplate<String, Object> kafkaTemplate,
+                                                       @Value("${kafka.topic.claim-executor-answer}") String topic,
+                                                       ClaimMapper mapper) {
         this.claimRepository = claimRepository;
         this.kafkaTemplate = kafkaTemplate;
         this.topic = topic;
@@ -27,8 +29,8 @@ public class ClaimResolutionServiceImpl implements ClaimResolutionService {
 
     @Transactional(readOnly = true)
     @Override
-    public void claimResolveResult(Long id) {
-        Claim claim = claimRepository.findById(id).orElseThrow();
-        kafkaTemplate.send(topic, mapper.toClaimResolutionDto(claim));
+    public void sendToCustomerClaimAnswer(Long id) {
+        Optional<Claim> claim = claimRepository.findById(id);
+        kafkaTemplate.send(topic, mapper.toClaimAnswerToCustomerDto(claim.orElseThrow()));
     }
 }

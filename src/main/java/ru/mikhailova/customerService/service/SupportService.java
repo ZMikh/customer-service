@@ -1,7 +1,6 @@
 package ru.mikhailova.customerService.service;
 
 import ru.mikhailova.customerService.domain.Claim;
-import ru.mikhailova.customerService.service.stateTransition.ClaimAnswer;
 
 import java.util.List;
 

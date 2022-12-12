@@ -14,10 +14,9 @@ import ru.mikhailova.customerService.listener.dto.ClaimResolutionDto;
 public class ClaimResolutionMessageListener {
     private final RuntimeService runtimeService;
 
-    @KafkaListener(topics = "${kafka.topic.claim-resolution}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${kafka.topic.claim-client-resolution}", groupId = "${spring.kafka.consumer.group-id}")
     public void claimResolutionListen(JsonNode dto) throws JsonProcessingException {
         ClaimResolutionDto resultDto = new ObjectMapper().treeToValue(dto, ClaimResolutionDto.class);
-
 
         runtimeService.createMessageCorrelation("claim_resolution_message")
                 .processInstanceVariableEquals("id", resultDto.getId())

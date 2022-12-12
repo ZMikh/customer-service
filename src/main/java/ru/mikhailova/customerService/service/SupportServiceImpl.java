@@ -10,7 +10,6 @@ import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.domain.ClaimExecutor;
 import ru.mikhailova.customerService.repository.ClaimRepository;
 import ru.mikhailova.customerService.repository.ExecutorRepository;
-import ru.mikhailova.customerService.service.stateTransition.ClaimAnswer;
 
 import java.time.LocalDateTime;
 import java.util.Collections;

@@ -29,4 +29,5 @@ kafka:
   topic:
     new-claim: newClaim
     claim-acceptance: claimAcceptance
-    claim-resolution: claimResolution
+    claim-client-resolution: claimClientResolution
+    claim-executor-answer: claimExecutorAnswer
