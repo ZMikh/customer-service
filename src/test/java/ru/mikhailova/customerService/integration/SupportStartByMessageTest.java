@@ -11,7 +11,6 @@ import ru.mikhailova.customerService.repository.ClaimRepository;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
@@ -34,8 +33,10 @@ public class SupportStartByMessageTest extends AbstractIntegrationTest {
         kafkaTemplate.send(newClaimTopic, dto);
         Thread.sleep(1000);
 
-        Optional<Claim> actual = claimRepository.findAll().stream().findAny();
-        assertThat(actual.orElseThrow().getClaimState()).isEqualTo(ClaimState.CREATED);
-        assertThat(actual.orElseThrow().getClaimCreatedTime()).isCloseTo(LocalDateTime.now(), within(1, ChronoUnit.MINUTES));
+        Claim receivedClaim = claimRepository.findAll().stream()
+                .findAny()
+                .orElseThrow();
+        assertThat(receivedClaim.getClaimState()).isEqualTo(ClaimState.CREATED);
+        assertThat(receivedClaim.getClaimCreatedTime()).isCloseTo(LocalDateTime.now(), within(2, ChronoUnit.SECONDS));
     }
 }

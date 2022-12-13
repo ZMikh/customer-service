@@ -5,21 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/mapper/ListenerMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/SupportStartByMessageTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/SupportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/SupportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimAnswerToCustomerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimAnswerToCustomerDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/exceptionHandler/ClaimAnswerExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/exceptionHandler/ClaimTypoExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/exceptionHandler/ClaimTypoExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/StateMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/mapper/StateMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/StateTransitionDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/StateTransitionDelegate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaimMessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaimMessageListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimAnswer/SendToCustomerClaimAnswerMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimAnswer/SendToCustomerClaimAnswerMessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/stateTransition/StateTransitionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/stateTransition/StateTransitionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/AbstractIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/AbstractIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/ClaimIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/ClaimIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/ClaimIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/SupportIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/SupportStartByMessageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/SupportStartByMessageTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +73,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClaimIntegrationTest.checkStartProcessNotByReceivingMessageFromNewClaimTopic" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SupportIntegrationTest.checkStartProcessNotByReceivingMessageFromNewClaimTopic" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
       <extension name="coverage">
         <pattern>
@@ -94,14 +82,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.integration" />
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.ClaimIntegrationTest" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.SupportIntegrationTest" />
       <option name="METHOD_NAME" value="checkStartProcessNotByReceivingMessageFromNewClaimTopic" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClaimIntegrationTest.couldGetClaimById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SupportIntegrationTest.couldGetClaimById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="support" />
       <extension name="coverage">
         <pattern>
@@ -110,7 +98,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.integration" />
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.ClaimIntegrationTest" />
+      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.SupportIntegrationTest" />
       <option name="METHOD_NAME" value="couldGetClaimById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -153,8 +141,8 @@
         <item itemvalue="JUnit.SupportStartByMessageTest.checkStartProcessNotByReceivingMessageFromNewClaimTopic" />
         <item itemvalue="JUnit.SupportStartByMessageTest" />
         <item itemvalue="JUnit.All in support" />
-        <item itemvalue="JUnit.ClaimIntegrationTest.checkStartProcessNotByReceivingMessageFromNewClaimTopic" />
-        <item itemvalue="JUnit.ClaimIntegrationTest.couldGetClaimById" />
+        <item itemvalue="JUnit.SupportIntegrationTest.checkStartProcessNotByReceivingMessageFromNewClaimTopic" />
+        <item itemvalue="JUnit.SupportIntegrationTest.couldGetClaimById" />
       </list>
     </recent_temporary>
   </component>
@@ -342,7 +330,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670869612067</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="code refactoring">
+      <created>1670957969895</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1670957969895</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -369,7 +364,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="init" />
     <MESSAGE value="add domain" />
     <MESSAGE value="add crud operations, claim executors migration" />
     <MESSAGE value="unit test on service add" />
@@ -394,7 +388,8 @@
     <MESSAGE value=" constraints on claim's fields: contactInfo, description, claimType add; claim answer itself, absence handler add, test on handler add; code refactoring" />
     <MESSAGE value="new camunda intermediate event add; controller, service refactoring" />
     <MESSAGE value="send task add; controller, service, test refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="send task add; controller, service, test refactoring" />
+    <MESSAGE value="code refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="code refactoring" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

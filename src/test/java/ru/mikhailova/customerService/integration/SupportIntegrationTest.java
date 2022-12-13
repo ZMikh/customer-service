@@ -22,7 +22,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ClaimIntegrationTest extends AbstractIntegrationTest {
+public class SupportIntegrationTest extends AbstractIntegrationTest {
     @Autowired
     private ClaimRepository claimRepository;
 
@@ -51,7 +51,6 @@ public class ClaimIntegrationTest extends AbstractIntegrationTest {
     void tearDown() {
         claimRepository.deleteAll();
     }
-
 
 
     @Test
