@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import ru.mikhailova.customerService.controller.dto.*;
-import ru.mikhailova.customerService.controller.exceptionHandler.ClaimAnswerExceptionHandler;
 import ru.mikhailova.customerService.controller.exceptionHandler.ClaimTypoExceptionHandler;
 import ru.mikhailova.customerService.controller.mapper.ClaimMapper;
 import ru.mikhailova.customerService.domain.Claim;
@@ -14,7 +13,6 @@ import ru.mikhailova.customerService.service.ClaimUpdate;
 import ru.mikhailova.customerService.service.SupportService;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/support/claim")
@@ -26,7 +24,8 @@ public class SupportController {
     @PostMapping("/start")
     @ApiOperation("Старт процесса сервиса поддержки клиентов")
     public String start(@RequestBody ClaimStartRequestDto claimStartRequestDto) throws ClaimTypoExceptionHandler {
-        if (StringUtils.isAnyBlank(claimStartRequestDto.getClaimType(),
+        if (StringUtils.isAnyBlank(
+                claimStartRequestDto.getClaimType(),
                 claimStartRequestDto.getCustomerContactInfo(),
                 claimStartRequestDto.getDescription())) {
             throw new ClaimTypoExceptionHandler();
@@ -48,9 +47,9 @@ public class SupportController {
     @PatchMapping("/execute/basic/{id}")
     @ApiOperation("Выполнение заявки общего типа исполнителем")
     public ClaimDto executeBasic(@PathVariable Long id,
-                                 @RequestBody ClaimAnswerRequestDto claimAnswerRequestDto) throws ClaimAnswerExceptionHandler {
-        if (Objects.isNull(claimAnswerRequestDto.getClaimAnswer())) {
-            throw new ClaimAnswerExceptionHandler();
+                                 @RequestBody ClaimAnswerRequestDto claimAnswerRequestDto) throws ClaimTypoExceptionHandler {
+        if (StringUtils.isBlank(claimAnswerRequestDto.getClaimAnswer())) {
+            throw new ClaimTypoExceptionHandler();
         }
         Claim claim = service.executeBasicClaim(id, mapper.toClaimAnswer(claimAnswerRequestDto));
         return mapper.toClaimDto(claim);
@@ -59,9 +58,9 @@ public class SupportController {
     @PatchMapping("/execute/assigned/{id}")
     @ApiOperation("Выполнение заявки специалистом по работе со специфичными запросами")
     public ClaimDto executeAssigned(@PathVariable Long id,
-                                    @RequestBody ClaimAnswerRequestDto claimAnswerRequestDto) throws ClaimAnswerExceptionHandler {
-        if (Objects.isNull(claimAnswerRequestDto.getClaimAnswer())) {
-            throw new ClaimAnswerExceptionHandler();
+                                    @RequestBody ClaimAnswerRequestDto claimAnswerRequestDto) throws ClaimTypoExceptionHandler {
+        if (StringUtils.isBlank(claimAnswerRequestDto.getClaimAnswer())) {
+            throw new ClaimTypoExceptionHandler();
         }
         Claim claim = service.executeAssignedClaim(id, mapper.toClaimAnswer(claimAnswerRequestDto));
         return mapper.toClaimDto(claim);

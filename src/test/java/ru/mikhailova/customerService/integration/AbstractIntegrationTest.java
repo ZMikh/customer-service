@@ -76,7 +76,7 @@ public abstract class AbstractIntegrationTest {
         return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
     }
 
-    protected ResultActions performClaimAnswerException(Long id, String executionType, Object requestBody, ResultMatcher resultMatcher) throws Exception {
+    protected ResultActions performClaimTypoException(Long id, String executionType, Object requestBody, ResultMatcher resultMatcher) throws Exception {
         return mockMvc.perform(patch(API_URL + "/execute" + executionType + id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestBody)))
@@ -112,5 +112,11 @@ public abstract class AbstractIntegrationTest {
                         .content(objectMapper.writeValueAsString(requestBody)))
                 .andDo(print()).andExpect(status().isOk());
         return objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), response);
+    }
+
+    protected Long getId(String responseAsString) {
+        String responseWithRemovedPartBeforeId = responseAsString.replace("Claim with id: ", "");
+        String stringId = responseWithRemovedPartBeforeId.replace(" is sent to registration", "");
+        return Long.parseLong(stringId);
     }
 }

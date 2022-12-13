@@ -10,6 +10,6 @@ import org.springframework.web.context.request.WebRequest;
 public class ClaimTypoExceptionHandler extends Throwable {
     @ExceptionHandler(value = IllegalStateException.class)
     public ResponseEntity<String> claimCreateParameterIsEmpty(RuntimeException ex, WebRequest request) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Field can't be empty");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fill in the fields");
     }
 }

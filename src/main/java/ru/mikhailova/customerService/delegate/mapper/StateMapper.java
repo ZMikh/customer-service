@@ -1,4 +1,4 @@
-package ru.mikhailova.customerService.controller.mapper;
+package ru.mikhailova.customerService.delegate.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.mikhailova.customerService.domain.ClaimState;

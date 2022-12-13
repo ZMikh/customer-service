@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @RequiredArgsConstructor
@@ -90,7 +89,6 @@ public class SupportServiceImpl implements SupportService {
             throw new RuntimeException();
         }
         taskService.complete(task.getId());
-
         return claim;
     }
 
@@ -138,11 +136,5 @@ public class SupportServiceImpl implements SupportService {
         claim.setNotes(claimUpdate.getNotes());
         claimRepository.save(claim);
         return claim;
-    }
-
-    @Transactional(readOnly = true)
-    private ClaimExecutor getRandomExecutor() {
-        Long executorId = (long) ThreadLocalRandom.current().nextInt(1, executorRepository.findAll().size() + 1);
-        return executorRepository.findById(executorId).orElseThrow();
     }
 }

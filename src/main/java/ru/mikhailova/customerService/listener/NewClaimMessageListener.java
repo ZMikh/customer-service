@@ -5,26 +5,25 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import ru.mikhailova.customerService.controller.dto.ClaimStartRequestDto;
-import ru.mikhailova.customerService.controller.mapper.ClaimMapper;
+import ru.mikhailova.customerService.domain.Claim;
+import ru.mikhailova.customerService.listener.mapper.ListenerMapper;
+import ru.mikhailova.customerService.service.SupportService;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class NewClaimMessageListener {
-    private final RuntimeService runtimeService;
-    private final ClaimMapper mapper;
+    private final SupportService service;
+    private final ListenerMapper mapper;
 
     @KafkaListener(topics = "${kafka.topic.new-claim}", groupId = "${spring.kafka.consumer.group-id}")
     public void newClaimListen(JsonNode dto) throws JsonProcessingException {
         ClaimStartRequestDto claimDto = new ObjectMapper().treeToValue(dto, ClaimStartRequestDto.class);
-        log.info("New claim message from {}", claimDto);
-
-        runtimeService.createMessageCorrelation("new_claim_message")
-                .processInstanceVariableEquals("id", mapper.toClaim(claimDto).getId())
-                .correlateWithResult();
+        Claim claim = mapper.toClaim(claimDto);
+        service.startSupport(claim);
+        log.info("New claim message with id: {} and parameters {}", claim.getId(), claimDto);
     }
 }

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
-import ru.mikhailova.customerService.controller.mapper.StateMapper;
+import ru.mikhailova.customerService.delegate.mapper.StateMapper;
 import ru.mikhailova.customerService.service.stateTransition.StateTransitionService;
 
 @Component
