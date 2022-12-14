@@ -12,7 +12,7 @@ public class SendToCustomerClaimAnswerMessageDelegate implements JavaDelegate {
     private final SendToCustomerClaimAnswerMessageService sendToCustomerClaimAnswerMessageService;
 
     @Override
-    public void execute(DelegateExecution execution) throws Exception {
+    public void execute(DelegateExecution execution) {
         Long id = (Long) execution.getVariable("id");
         sendToCustomerClaimAnswerMessageService.sendToCustomerClaimAnswer(id);
     }

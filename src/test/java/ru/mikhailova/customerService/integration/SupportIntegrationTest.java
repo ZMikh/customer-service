@@ -143,6 +143,7 @@ public class SupportIntegrationTest extends AbstractIntegrationTest {
         ClaimResolutionDto resolutionDto = new ClaimResolutionDto();
         resolutionDto.setId(claim.getId());
         resolutionDto.setQueryIsSolved(false);
+        resolutionDto.setClientResponseOnClaimAnswer("send confirmation");
 
         //when
         kafkaTemplate.send(claimClientResolutionTopic, resolutionDto);
@@ -167,6 +168,7 @@ public class SupportIntegrationTest extends AbstractIntegrationTest {
         ClaimResolutionDto resolutionDto = new ClaimResolutionDto();
         resolutionDto.setId(claim.getId());
         resolutionDto.setQueryIsSolved(true);
+        resolutionDto.setClientResponseOnClaimAnswer("claim is solved, data updated");
 
         //when
         kafkaTemplate.send(claimClientResolutionTopic, resolutionDto);
@@ -175,6 +177,7 @@ public class SupportIntegrationTest extends AbstractIntegrationTest {
         //then
         Claim claimResolved = claimRepository.findById(claim.getId()).orElseThrow();
         assertThat(claimResolved.getClaimState()).isEqualTo(ClaimState.FINISHED);
+        assertThat(claimResolved.getClientResponseOnClaimAnswer()).containsIgnoringCase("solved");
     }
 
     @Test

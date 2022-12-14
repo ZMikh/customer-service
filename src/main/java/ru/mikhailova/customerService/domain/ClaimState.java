@@ -1,7 +1,7 @@
 package ru.mikhailova.customerService.domain;
 
 /**
- * Статусы заявки
+ * Статус заявки
  */
 public enum ClaimState {
     /**

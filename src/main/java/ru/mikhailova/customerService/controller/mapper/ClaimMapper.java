@@ -46,9 +46,12 @@ public class ClaimMapper {
     public Claim toClaim(ClaimStartRequestDto dto) {
         return mapper.map(dto, Claim.class);
     }
-
     public ClaimRegisterResponseDto toClaimRegisterResponseDto(Claim claim) {
         return mapper.map(claim, ClaimRegisterResponseDto.class);
+    }
+
+    public ClaimRegistrationInfoToCustomerDto toClaimRegistrationInfoToCustomerDto(Claim claim) {
+        return mapper.map(claim, ClaimRegistrationInfoToCustomerDto.class);
     }
 
     public ClaimRegister toClaimRegister(ClaimRegisterRequestDto dto) {

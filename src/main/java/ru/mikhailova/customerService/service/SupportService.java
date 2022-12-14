@@ -72,4 +72,10 @@ public interface SupportService {
      * @return заявка
      */
     Claim executeAssignedClaim(Long id, ClaimAnswer claimAnswer);
+
+    /**
+     * Внести ответ от клиента по решению заявки
+     * @param claimResult заявка
+     */
+    void addClaimResolutionResult(Long id, ClaimResult claimResult);
 }

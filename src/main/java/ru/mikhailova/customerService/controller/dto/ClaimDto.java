@@ -27,6 +27,10 @@ public class ClaimDto {
     private ClaimExecutorDto executor;
     @ApiModelProperty("Ответ на запрос по заявке")
     private String claimAnswer;
+    @ApiModelProperty("Ответ клиента на решение по заявки")
+    private String clientResponseOnClaimAnswer;
+    @ApiModelProperty("Решение по заявке принято клиентом")
+    private Boolean queryIsSolved;
     @ApiModelProperty("Примечание")
     private String notes;
 }

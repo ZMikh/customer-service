@@ -22,7 +22,7 @@ public class NewClaimMessageListener {
     @KafkaListener(topics = "${kafka.topic.new-claim}", groupId = "${spring.kafka.consumer.group-id}")
     public void newClaimListen(JsonNode dto) throws JsonProcessingException {
         ClaimStartRequestDto claimDto = new ObjectMapper().treeToValue(dto, ClaimStartRequestDto.class);
-        Claim claim = mapper.toClaim(claimDto);
+        Claim claim = mapper.startRequestDtoToClaim(claimDto);
         service.startSupport(claim);
         log.info("New claim message with id: {} and parameters {}", claim.getId(), claimDto);
     }

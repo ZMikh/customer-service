@@ -110,6 +110,22 @@ public class SupportServiceImpl implements SupportService {
 
         return claim;
     }
+    @Transactional
+    @Override
+    public void addClaimResolutionResult(Long id, ClaimResult claimResult) {
+        Claim claim = claimRepository.findById(id).orElseThrow();
+        claim.setQueryIsSolved(claimResult.getQueryIsSolved());
+        claim.setClientResponseOnClaimAnswer(claimResult.getClientResponseOnClaimAnswer());
+
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("queryIsSolved", claim.getQueryIsSolved());
+        variables.put("clientResponseOnClaimAnswer", claim.getClientResponseOnClaimAnswer());
+
+        runtimeService.createMessageCorrelation("claim_resolution_message")
+                .processInstanceVariableEquals("id", id)
+                .setVariables(variables)
+                .correlateWithResult();
+    }
 
     @Transactional(readOnly = true)
     @Override

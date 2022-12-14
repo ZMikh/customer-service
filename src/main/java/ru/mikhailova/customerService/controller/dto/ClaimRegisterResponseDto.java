@@ -23,6 +23,4 @@ public class ClaimRegisterResponseDto {
     private String description;
     @ApiModelProperty("Исполнитель заявки")
     private ClaimExecutorDto executor;
-    @ApiModelProperty("Заявка переназначена на специалиста по работе со специфичными запросами")
-    private Boolean isAssigned;
 }

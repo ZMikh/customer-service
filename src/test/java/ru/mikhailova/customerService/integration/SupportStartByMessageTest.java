@@ -24,7 +24,7 @@ public class SupportStartByMessageTest extends AbstractIntegrationTest {
     private String newClaimTopic;
 
     @Test
-    void checkStartProcessNotByReceivingMessageFromNewClaimTopic() throws InterruptedException {
+    void checkStartProcessByReceivingMessageFromNewClaimTopic() throws InterruptedException {
         ClaimStartRequestDto dto = new ClaimStartRequestDto();
         dto.setClaimType("ENQUIRY");
         dto.setCustomerContactInfo("+00000000");

@@ -33,7 +33,7 @@ public class SendToCustomerClaimAcceptedMessageServiceImpl implements SendToCust
         Claim claim = repository.findById(id).orElseThrow();
         log.info("Claim registration details with id: {} are sent", claim.getId());
 
-        kafkaTemplate.send(topic, mapper.toClaimRegisterResponseDto(claim));
+        kafkaTemplate.send(topic, mapper.toClaimRegistrationInfoToCustomerDto(claim));
     }
 }
 

@@ -23,10 +23,10 @@
       <bpmn:outgoing>Flow_0ixrvdt</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0ttuz1i" sourceRef="Activity_1bctrmy" targetRef="Gateway_1yyb66l" />
-    <bpmn:serviceTask id="Activity_13qem4r" name="Перевести заявку" camunda:delegateExpression="${claimShiftDelegate}">
+    <bpmn:serviceTask id="Activity_13qem4r" name="Техническая обработка заявки" camunda:delegateExpression="${claimExecutionDelegate}">
       <bpmn:extensionElements />
-      <bpmn:incoming>Flow_0ixrvdt</bpmn:incoming>
-      <bpmn:outgoing>Flow_04lh411</bpmn:outgoing>
+      <bpmn:incoming>Flow_0ko83pl</bpmn:incoming>
+      <bpmn:outgoing>Flow_0e5yr3q</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:userTask id="basicClaimExecution" name="Выполнить базовую заявку">
       <bpmn:incoming>Flow_18c8if6</bpmn:incoming>
@@ -35,17 +35,16 @@
     <bpmn:sequenceFlow id="Flow_18c8if6" sourceRef="Gateway_1yyb66l" targetRef="basicClaimExecution" />
     <bpmn:exclusiveGateway id="Gateway_0k2wv6l">
       <bpmn:incoming>Flow_0h54wu5</bpmn:incoming>
-      <bpmn:incoming>Flow_0rgf1zi</bpmn:incoming>
+      <bpmn:incoming>Flow_0e5yr3q</bpmn:incoming>
       <bpmn:outgoing>Flow_1mlb9zu</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_04lh411" sourceRef="Activity_13qem4r" targetRef="assignedState" />
     <bpmn:sequenceFlow id="Flow_0h54wu5" sourceRef="basicClaimExecution" targetRef="Gateway_0k2wv6l" />
     <bpmn:intermediateThrowEvent id="assignedState" name="Заявка назначена">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${stateTransitionDelegate}" event="start" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_04lh411</bpmn:incoming>
-      <bpmn:outgoing>Flow_0gu47m8</bpmn:outgoing>
+      <bpmn:incoming>Flow_0ixrvdt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0eiujj8</bpmn:outgoing>
     </bpmn:intermediateThrowEvent>
     <bpmn:sequenceFlow id="Flow_1mlb9zu" sourceRef="Gateway_0k2wv6l" targetRef="processedState" />
     <bpmn:endEvent id="finishedState" name="Заявка выполнена">
@@ -94,11 +93,9 @@
       <bpmn:outgoing>Flow_0if7x9a</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="specificClaimExecution" name="Выполнить заявку специалистом">
-      <bpmn:incoming>Flow_0gu47m8</bpmn:incoming>
-      <bpmn:outgoing>Flow_0rgf1zi</bpmn:outgoing>
+      <bpmn:incoming>Flow_0eiujj8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ko83pl</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0gu47m8" sourceRef="assignedState" targetRef="specificClaimExecution" />
-    <bpmn:sequenceFlow id="Flow_0rgf1zi" sourceRef="specificClaimExecution" targetRef="Gateway_0k2wv6l" />
     <bpmn:startEvent id="newState" name="Обращение в службу поддержки">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${stateTransitionDelegate}" event="start" />
@@ -106,7 +103,7 @@
       <bpmn:outgoing>Flow_0fpq6lt</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0lreadd" messageRef="Message_2c51g9c" />
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_0ixrvdt" sourceRef="Gateway_1yyb66l" targetRef="Activity_13qem4r">
+    <bpmn:sequenceFlow id="Flow_0ixrvdt" sourceRef="Gateway_1yyb66l" targetRef="assignedState">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isAssigned==true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:intermediateThrowEvent id="createdState" name="Заявка сформирована">
@@ -122,6 +119,9 @@
       <bpmn:incoming>Flow_1g5drld</bpmn:incoming>
       <bpmn:outgoing>Flow_1axflud</bpmn:outgoing>
     </bpmn:sendTask>
+    <bpmn:sequenceFlow id="Flow_0e5yr3q" sourceRef="Activity_13qem4r" targetRef="Gateway_0k2wv6l" />
+    <bpmn:sequenceFlow id="Flow_0eiujj8" sourceRef="assignedState" targetRef="specificClaimExecution" />
+    <bpmn:sequenceFlow id="Flow_0ko83pl" sourceRef="specificClaimExecution" targetRef="Activity_13qem4r" />
   </bpmn:process>
   <bpmn:message id="Message_2mko57q" name="claim_resolution_message" />
   <bpmn:message id="Message_2c51g9c" name="new_claim_message" />
@@ -139,10 +139,6 @@
       <bpmndi:BPMNShape id="Gateway_1yyb66l_di" bpmnElement="Gateway_1yyb66l" isMarkerVisible="true">
         <dc:Bounds x="815" y="152" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1c4mn7r_di" bpmnElement="Activity_13qem4r">
-        <dc:Bounds x="920" y="240" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1uh7fug_di" bpmnElement="basicClaimExecution">
         <dc:Bounds x="990" y="137" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -150,10 +146,10 @@
       <bpmndi:BPMNShape id="Gateway_0k2wv6l_di" bpmnElement="Gateway_0k2wv6l" isMarkerVisible="true">
         <dc:Bounds x="1305" y="152" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_12jiqkw_di" bpmnElement="assignedState">
-        <dc:Bounds x="1082" y="262" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_0lucbaw_di" bpmnElement="finishedState">
+        <dc:Bounds x="2022" y="159" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1073" y="308" width="54" height="27" />
+          <dc:Bounds x="2012" y="202" width="57" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1dq4ehz_di" bpmnElement="processedState">
@@ -162,12 +158,21 @@
           <dc:Bounds x="1390" y="202" width="61" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nwfkvo_di" bpmnElement="Activity_07tzyy4">
+        <dc:Bounds x="1690" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1t72k83_di" bpmnElement="Gateway_1t72k83" isMarkerVisible="true">
+        <dc:Bounds x="1875" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0x5vjyt_di" bpmnElement="notResolvedState">
+        <dc:Bounds x="1882" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1787" y="93" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0njyl2j_di" bpmnElement="claimRegistration">
         <dc:Bounds x="360" y="137" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0iky4eo_di" bpmnElement="specificClaimExecution">
-        <dc:Bounds x="1200" y="240" width="100" height="80" />
-        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0ttefk7_di" bpmnElement="newState">
         <dc:Bounds x="132" y="159" width="36" height="36" />
@@ -181,28 +186,23 @@
           <dc:Bounds x="232" y="202" width="77" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0lucbaw_di" bpmnElement="finishedState">
-        <dc:Bounds x="2022" y="159" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2012" y="202" width="57" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1t72k83_di" bpmnElement="Gateway_1t72k83" isMarkerVisible="true">
-        <dc:Bounds x="1875" y="152" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0x5vjyt_di" bpmnElement="notResolvedState">
-        <dc:Bounds x="1882" y="82" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1787" y="93" width="86" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0nwfkvo_di" bpmnElement="Activity_07tzyy4">
-        <dc:Bounds x="1690" y="137" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1juqfjx_di" bpmnElement="Activity_0pz1hxs">
         <dc:Bounds x="1510" y="137" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0iky4eo_di" bpmnElement="specificClaimExecution">
+        <dc:Bounds x="990" y="240" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1c4mn7r_di" bpmnElement="Activity_13qem4r">
+        <dc:Bounds x="1160" y="240" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12jiqkw_di" bpmnElement="assignedState">
+        <dc:Bounds x="892" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="883" y="308" width="54" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0fpq6lt_di" bpmnElement="Flow_0fpq6lt">
         <di:waypoint x="168" y="177" />
@@ -223,10 +223,6 @@
       <bpmndi:BPMNEdge id="Flow_18c8if6_di" bpmnElement="Flow_18c8if6">
         <di:waypoint x="865" y="177" />
         <di:waypoint x="990" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_04lh411_di" bpmnElement="Flow_04lh411">
-        <di:waypoint x="1020" y="280" />
-        <di:waypoint x="1082" y="280" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0h54wu5_di" bpmnElement="Flow_0h54wu5">
         <di:waypoint x="1090" y="177" />
@@ -258,19 +254,10 @@
         <di:waypoint x="840" y="50" />
         <di:waypoint x="840" y="152" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0gu47m8_di" bpmnElement="Flow_0gu47m8">
-        <di:waypoint x="1118" y="280" />
-        <di:waypoint x="1200" y="280" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0rgf1zi_di" bpmnElement="Flow_0rgf1zi">
-        <di:waypoint x="1300" y="280" />
-        <di:waypoint x="1330" y="280" />
-        <di:waypoint x="1330" y="202" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ixrvdt_di" bpmnElement="Flow_0ixrvdt">
         <di:waypoint x="840" y="202" />
         <di:waypoint x="840" y="280" />
-        <di:waypoint x="920" y="280" />
+        <di:waypoint x="892" y="280" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ubcvbh_di" bpmnElement="Flow_1ubcvbh">
         <di:waypoint x="288" y="177" />
@@ -279,6 +266,19 @@
       <bpmndi:BPMNEdge id="Flow_1axflud_di" bpmnElement="Flow_1axflud">
         <di:waypoint x="1610" y="177" />
         <di:waypoint x="1690" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0e5yr3q_di" bpmnElement="Flow_0e5yr3q">
+        <di:waypoint x="1260" y="280" />
+        <di:waypoint x="1330" y="280" />
+        <di:waypoint x="1330" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0eiujj8_di" bpmnElement="Flow_0eiujj8">
+        <di:waypoint x="928" y="280" />
+        <di:waypoint x="990" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ko83pl_di" bpmnElement="Flow_0ko83pl">
+        <di:waypoint x="1090" y="280" />
+        <di:waypoint x="1160" y="280" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @NamedEntityGraph(name = "Claim.executor",
         attributeNodes = @NamedAttributeNode(value = "executor"))
-public class  Claim {
+public class Claim {
     /**
      * Идентификатор заявки
      */
@@ -55,7 +55,6 @@ public class  Claim {
     /**
      * Решение по заявке принято клиентом
      */
-    @Transient
     private Boolean queryIsSolved;
     /**
      * Время завершения заявки
@@ -69,6 +68,10 @@ public class  Claim {
      * Примечание
      */
     private String notes;
+    /**
+     * Ответ клиента на решение по заявке
+     */
+    private String clientResponseOnClaimAnswer;
     /**
      * Исполнитель заявки
      */
