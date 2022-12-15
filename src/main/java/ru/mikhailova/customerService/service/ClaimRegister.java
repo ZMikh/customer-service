@@ -3,7 +3,7 @@ package ru.mikhailova.customerService.service;
 import lombok.Data;
 
 /**
- *  Параметры регистрации заявки
+ * Параметры регистрации заявки
  */
 @Data
 public class ClaimRegister {

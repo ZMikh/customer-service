@@ -11,6 +11,6 @@ public class ClaimResolutionDto {
     private Long id;
     @ApiModelProperty("Решение по заявке принято клиентом")
     private Boolean queryIsSolved;
-    @ApiModelProperty("Ответ клиента на решение по заявки")
+    @ApiModelProperty("Ответ клиента на решение по заявке")
     private String clientResponseOnClaimAnswer;
 }

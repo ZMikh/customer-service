@@ -5,30 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegistrationInfoToCustomerDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/ClaimResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimRegisterResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimStartRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/dto/ClaimStartRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/ClaimMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/controller/mapper/ClaimMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/ClaimShiftDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/ClaimExecutionDelegate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/SendToCustomerClaimAnswerMessageDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/delegate/SendToCustomerClaimAnswerMessageDelegate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/Claim.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/domain/ClaimState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/ClaimResolutionMessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/ClaimResolutionMessageListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaimMessageListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/NewClaimMessageListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/dto/ClaimResolutionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/dto/ClaimResolutionDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/mapper/ListenerMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/listener/mapper/ListenerMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/SupportServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimRegistrationInformation/SendToCustomerClaimAcceptedMessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimRegistrationInformation/SendToCustomerClaimAcceptedMessageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimResolution/ClaimResolutionService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimResolution/ClaimResolutionServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bpmn/support.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bpmn/support.bpmn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V002__create_table_claim.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V002__create_table_claim.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/SupportIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/SupportIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/SupportStartByMessageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/SupportStartByMessageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/ClaimAnswer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/ClaimAnswer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/ClaimRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/ClaimRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimAnswer/SendToCustomerClaimAnswerMessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/mikhailova/customerService/service/claimAnswer/SendToCustomerClaimAnswerMessageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/AbstractIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/mikhailova/customerService/integration/AbstractIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +69,7 @@
       <recent name="ru.mikhailova.customerService.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
+  <component name="RunManager" selected="JUnit.All in support">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.App" />
       <module name="support" />
@@ -156,10 +140,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SupportIntegrationTest.couldCheckClaimIsResolved" />
-        <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.SupportServiceImplTest.couldUpdateClaimById" />
         <item itemvalue="JUnit.All in support" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.SupportIntegrationTest.couldCheckClaimIsResolved" />
+        <item itemvalue="JUnit.SupportServiceImplTest.couldUpdateClaimById" />
         <item itemvalue="JUnit.SupportStartByMessageTest" />
       </list>
     </recent_temporary>
@@ -362,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670958895903</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="code refactoring, service for claim resolution update">
+      <created>1671037470592</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1671037470592</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -389,7 +380,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add crud operations, claim executors migration" />
     <MESSAGE value="unit test on service add" />
     <MESSAGE value="add kafka configuration" />
     <MESSAGE value="add delegates; service, mapper for StateTransitionDelegate" />
@@ -414,7 +404,8 @@
     <MESSAGE value="send task add; controller, service, test refactoring" />
     <MESSAGE value="code refactoring" />
     <MESSAGE value="support start separate test class add, code refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="support start separate test class add, code refactoring" />
+    <MESSAGE value="code refactoring, service for claim resolution update" />
+    <option name="LAST_COMMIT_MESSAGE" value="code refactoring, service for claim resolution update" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

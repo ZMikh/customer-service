@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@ApiModel("Параметры для запроса при старте процесса")
+@ApiModel("Параметры для запроса при формировании обращения")
 public class ClaimStartRequestDto {
     @ApiModelProperty("Контактные данные клиента")
     private String customerContactInfo;

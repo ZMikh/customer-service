@@ -5,7 +5,6 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 import ru.mikhailova.customerService.controller.dto.*;
 import ru.mikhailova.customerService.domain.Claim;
-import ru.mikhailova.customerService.listener.dto.ClaimResolutionDto;
 import ru.mikhailova.customerService.service.ClaimAnswer;
 import ru.mikhailova.customerService.service.ClaimRegister;
 import ru.mikhailova.customerService.service.ClaimUpdate;
@@ -46,6 +45,7 @@ public class ClaimMapper {
     public Claim toClaim(ClaimStartRequestDto dto) {
         return mapper.map(dto, Claim.class);
     }
+
     public ClaimRegisterResponseDto toClaimRegisterResponseDto(Claim claim) {
         return mapper.map(claim, ClaimRegisterResponseDto.class);
     }
@@ -58,13 +58,10 @@ public class ClaimMapper {
         return mapper.map(dto, ClaimRegister.class);
     }
 
-    public ClaimResolutionDto toClaimResolutionDto(Claim claim) {
-        return mapper.map(claim, ClaimResolutionDto.class);
-    }
-
     public ClaimAnswer toClaimAnswer(ClaimAnswerRequestDto dto) {
         return mapper.map(dto, ClaimAnswer.class);
     }
+
     public ClaimAnswerToCustomerDto toClaimAnswerToCustomerDto(Claim claim) {
         return mapper.map(claim, ClaimAnswerToCustomerDto.class);
     }

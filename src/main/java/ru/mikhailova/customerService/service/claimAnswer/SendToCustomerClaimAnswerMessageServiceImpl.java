@@ -8,8 +8,6 @@ import ru.mikhailova.customerService.controller.mapper.ClaimMapper;
 import ru.mikhailova.customerService.domain.Claim;
 import ru.mikhailova.customerService.repository.ClaimRepository;
 
-import java.util.Optional;
-
 @Service
 public class SendToCustomerClaimAnswerMessageServiceImpl implements SendToCustomerClaimAnswerMessageService {
     private final ClaimRepository claimRepository;
@@ -30,7 +28,7 @@ public class SendToCustomerClaimAnswerMessageServiceImpl implements SendToCustom
     @Transactional(readOnly = true)
     @Override
     public void sendToCustomerClaimAnswer(Long id) {
-        Optional<Claim> claim = claimRepository.findById(id);
-        kafkaTemplate.send(topic, mapper.toClaimAnswerToCustomerDto(claim.orElseThrow()));
+        Claim claim = claimRepository.findById(id).orElseThrow();
+        kafkaTemplate.send(topic, mapper.toClaimAnswerToCustomerDto(claim));
     }
 }
