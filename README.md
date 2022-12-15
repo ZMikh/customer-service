@@ -8,6 +8,15 @@
 - Заявка, в процессе исполнения, исходя из сложности, может переназначаться
 - Чтобы завершить процесс необходимо получить от клиента положительный ответ по решению заявки
 
+### Запуск проекта 
+выполнить
+```
+mvn package 
+```
+далее в терминале
+```
+docker compose up
+```
 
 ### Конфигурация
 - Переменные окружения для настройки проекта
@@ -35,73 +44,76 @@
 
 ### Переходы состояний процесса
 1. ```newState``` -> ```createdState```
-   - _способ 1_ Отправить запрос методом ```POST``` по endpoint ```http://localhost:8080/api/v1/support/claim/start``` с request body в формате json 
+   - _вариант 1_ Отправить запрос методом ```POST``` по endpoint ```http://localhost:8080/api/v1/support/claim/start``` с request body в формате json 
        - пример request body 
          {
            "customerContactInfo":"+77777",
            "claimType":"OFFER",
            "description":"appUpgrade"
          }
-   - _способ 2_ Отправить сообщение в topic ```newClaim```
-       - пример value сообщения
-         {
-           "customerContactInfo":"+00000",
-           "claimType":"ENQUIRY",
-           "description":"place gates"
-         }
+   - _вариант 2_ Отправить сообщение в topic ```newClaim```
+       - в терминале выполнить ```docker exec --interactive --tty broker_support kafka-console-producer --bootstrap-server broker_support:9092 --topic newClaim```, далее записать сообщение
+         - пример сообщения
+           {"customerContactInfo":"+00000", "claimType":"ENQUIRY", "description":"place gates"}
     
 2. ```createdState``` -> ```acceptedState```
    - отправить запрос методом ```PATCH``` по endpoint ```http://localhost:8080/api/v1/support/claim/register/{id}``` с указанием идентификатора и request body в формате json
      - пример request body
        {
-          "isAssigned":false // исполнение заявки общего типа
+          "isAssigned":false
        }
 
 3. ```createdState``` -> ```assignedState```
    - отправить запрос методом ```PATCH``` по endpoint ```http://localhost:8080/api/v1/support/claim/register/{id}``` с указанием идентификатора и request body в формате json
      - пример request body
        {
-          "isAssigned":true // заявка переведена на специалиста по работе со специфичными запросами
+          "isAssigned":true
        }
    
 4. ```acceptedState``` -> ```processedState```
    - отправить запрос методом ```PATCH``` по endpoint ```http://localhost:8080/api/v1/support/claim/execute/basic/{id}``` с указанием идентификатора и request body в формате json
      - пример request body
        {
-         "claimAnswer":"will be resolved in 10 days" // ответ специалиста по заявке
+         "claimAnswer":"will be resolved in 10 days"
        }
      
 5. ```assignedState``` -> ```processedState```
    - отправить запрос методом ```PATCH``` по endpoint  ```http://localhost:8080/api/v1/support/claim/execute/assigned/{id}``` с указанием идентификатора и request body в формате json
      - пример request body
        {
-         "claimAnswer":"will be resolved in 10 days" // ответ специалиста по заявке
+         "claimAnswer":"will be resolved in 10 days"
        }
     
 6. ```processedState``` -> ```notResolvedState```
    - отправить сообщение в topic ```claimClientResolution```
-     - пример value сообщения
-       {
-         "id":"1",
-         "queryIsResolved":false // ответ клиента по решению заявки 
-       }
+     - в терминале выполнить ```docker exec --interactive --tty broker_support kafka-console-producer --bootstrap-server broker_support:9092 --topic claimClientResolution```, далее записать сообщение
+       - пример сообщения
+         {"id":1, "queryIsSolved":false, "clientResponseOnClaimAnswer":"hasn't fixed yet"}
 
 7. ```processedState``` -> ```assignedState```
    - отправить сообщение в topic ```claimClientResolution```
-     - пример value сообщения
-        {
-          "id":"2",
-          "queryIsResolved":false
-        }
+     - в терминале выполнить ```docker exec --interactive --tty broker_support kafka-console-producer --bootstrap-server broker_support:9092 --topic claimClientResolution```, далее записать сообщение
+       - пример сообщения
+          {"id":1, "queryIsSolved":false, "clientResponseOnClaimAnswer":"hasn't fixed yet"}
+
 8. ```processedState``` -> ```finishedState```
    - отправить сообщение в topic ```claimClientResolution```
-     - пример value сообщения
-      {
-        "id":"2",
-        "queryIsResolved":true // 
-      }
-
-
+     - в терминале выполнить ```docker exec --interactive --tty broker_support kafka-console-producer --bootstrap-server broker_support:9092 --topic claimClientResolution```, далее записать сообщение
+       - пример сообщения
+        {"id":1, "queryIsSolved":true, "clientResponseOnClaimAnswer":"fixed"}
+    
+### Дополнительно
+- чтение ответов 
+  - заявка принята
+    - ```docker exec --interactive --tty broker_support kafka-console-consumer --bootstrap-server broker_support:9092 --topic claimAcceptance --from-beginning```
+  - ответ по заявке от исполнителя
+     - ```docker exec --interactive --tty broker_support kafka-console-consumer --bootstrap-server broker_support:9092 --topic claimExecutorAnswer --from-beginning```
+- внесение примечания по заявке исполнителем в любой момент по процессу 
+   - отправить запрос методом ```PATCH``` по endpoint  ```http://localhost:8080/api/v1/support/claim/update-by-id/{id}``` с указанием идентификатора и request body в формате json
+      - пример request body 
+        {
+           "notes":"check documentation" 
+        }
 ### Используемые в проекте технологии
 - ```Spring Data Jpa```
 - ```Flyway```
