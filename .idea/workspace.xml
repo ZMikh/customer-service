@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="code refactoring">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    <list default="true" id="481be06e-7aae-4fed-8a5a-ec7e13c613c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +26,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/kafka/spring-kafka/2.8.10/spring-kafka-2.8.10-sources.jar!/org/springframework/kafka/annotation/DltHandler.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -87,26 +88,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SupportIntegrationTest.couldCheckClaimIsResolved" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="support" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.mikhailova.customerService.integration.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ru.mikhailova.customerService.integration" />
-      <option name="MAIN_CLASS_NAME" value="ru.mikhailova.customerService.integration.SupportIntegrationTest" />
-      <option name="METHOD_NAME" value="couldCheckClaimIsResolved" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
           <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="Kafka Compose: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="../../Kafka Compose/docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
@@ -121,11 +114,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="Application.App" />
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="JUnit.All in support" />
-        <item itemvalue="JUnit.SupportIntegrationTest.couldCheckClaimIsResolved" />
+        <item itemvalue="Docker.Kafka Compose: Compose Deployment" />
+        <item itemvalue="Docker.Dockerfile" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -341,7 +334,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671094193515</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="readme update, docker add">
+      <created>1671101721349</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1671101721349</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -368,7 +368,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="unit test on service add" />
     <MESSAGE value="add kafka configuration" />
     <MESSAGE value="add delegates; service, mapper for StateTransitionDelegate" />
     <MESSAGE value="add state transition service" />
@@ -393,7 +392,8 @@
     <MESSAGE value="support start separate test class add, code refactoring" />
     <MESSAGE value="code refactoring, service for claim resolution update" />
     <MESSAGE value="code refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="code refactoring" />
+    <MESSAGE value="readme update, docker add" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme update, docker add" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
